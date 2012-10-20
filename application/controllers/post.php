@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Lister extends CI_Controller {
+class Post extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -17,10 +17,45 @@ class Lister extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function index()
 	{
-		$this->load->view('lister');
+        $this->lister();
+
 	}
+
+    public function lister()
+    {
+        $this->load->model('M_Post');
+        $dataList['posts'][0] = $this->M_Post->lister();
+
+        foreach($dataList['posts'][0] as $data){
+            $url = $data->url;
+            $curl = curl_init();
+           curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            $html = curl_exec($curl);
+            curl_close($curl);
+
+            $htmlDom = new DOMDocument();
+            $htmlDom->loadHTML($html);
+
+            $DomNodeList = null;
+            $DomNodeList = $htmlDom->getElementsByTagName('title');
+
+            $dataList['html'] = $DomNodeList->item(0);
+
+            $dataList['html'] = $dataList['html']->nodeValue;
+
+        }
+
+        $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
 }
 
 /* End of file welcome.php */

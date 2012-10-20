@@ -1,8 +1,10 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: annabelle
- * Date: 17/10/12
- * Time: 12:24
- * To change this template use File | Settings | File Templates.
- */
+<!DOCTYPE HTML>
+<html lang="fr-BE">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un lien</title>
+</head>
+<body>
+<?php echo $vue; ?>
+</body>
+</html>
