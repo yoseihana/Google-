@@ -9,6 +9,11 @@
 
 class M_Post extends CI_Model
 {
+    public function __construct()
+    {
+        $this->load->database();
+    }
+
     public function lister()
     {
         $this->db->select('*');
@@ -16,5 +21,22 @@ class M_Post extends CI_Model
 
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function ajouter(){
+       //Chargement de la librairie
+        $this->load->helpers(array('form', 'url'));
+
+        //$slug = url_title($this->input->post('url'), 'dash', true);
+
+        //Donnée pour la DB dans un tableau
+        $data = array(
+            'pseudo'=> $this->input->post('pseudo'),
+            'commentaire'=>$this->textarea->post('commentaire'),
+             'url'=>$this->input->post('url')
+        );
+
+        //Insertion DB
+        return $this->db->insert('post', $data);
     }
 }

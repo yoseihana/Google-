@@ -40,6 +40,9 @@
 
 $route['default_controller'] = "post";
 $route['404_override'] = '';
+//Pour l'ajout dans la DB
+$route['post/lister'] = 'post/lister';
+$route['post/:any'] = 'prof/lister';
 
 
 /* End of file routes.php */
