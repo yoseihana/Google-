@@ -25,12 +25,16 @@ class Post extends CI_Controller {
     public function index()
 	{
         $this->ajouter();
+        //$this->load->library('image_lib');
 
 	}
 
     public function ajouter()
     {
         $this->load->helper('form');
+        $this->load->helper('html');
+        $this->load->model('M_Post');
+        $dataList['posts']= $this->M_Post->lister();
         $dataList['title'] = "Ajouter un lien";
 
 
@@ -40,6 +44,8 @@ class Post extends CI_Controller {
 
     public function lister()
     {
+        $this->load->helper('html');
+        $this->load->helper('form');
         $this->load->model('M_Post');
         $dataList['posts']= $this->M_Post->lister();
 
@@ -58,7 +64,7 @@ class Post extends CI_Controller {
         $dataList['titre'] = $DomNodeList->item(0)->nodeValue;
 
         //Intégration du meta description
-        $DomNodeList = $htmlDom->getElementsByTagName("meta");
+        $DomNodeList = $htmlDom->getElementsByTagName('meta');
 
         // Boucle sur les resultats du tag meta
         foreach($DomNodeList as $node){
@@ -67,9 +73,16 @@ class Post extends CI_Controller {
             }
         }
 
-        //Intégration des img
-        $DomNodeList = $html->getElementsByTagName('img');
+        //Intégration image
+        $DomNodeList = $htmlDom->getElementsByTagName('img');
+        foreach($DomNodeList as $node){
+            $dataList['images'][] = $node->getAttribute('src');
 
+        }
+
+        $dataList['pseudo'] = $this->input->post('pseudo');
+        $dataList['commentaire'] = $this->input->post('commentaire');
+        $dataList['url'] = $lien;
 
         //Intégration dans la vue de tous les éléments
         $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
@@ -77,36 +90,42 @@ class Post extends CI_Controller {
     }
 
     //Fonction pour ajouter dans la BD
-    public function créer()
+    public function creer()
     {
-       /* //Chargement des post
-        // $this->load->model('M_Post');
-        // $dataList['posts']= $this->M_Post->lister();
-
-        //Chargement livbraire pour form et validation form
-        $this->load->helpers(array('form', 'url'));
+        $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $data['title'] = "Ajouter un lien";
+        /*$data['title'] = 'Create a news item';
 
-        //Validation des éléments dans les champs
-        $this->form_validation->set_rules('pseudo', 'Pseudo', 'Obligatoire');
-        $this->form_validation->set_rules('commentaire', 'Commentaire', 'Obligatoire');
-        $this->form_validation->set_rules('lien', 'Lien', 'Obligatoire');
-
-        //Si les champs contiennent qqch
-        if($this->form_validation->run() == FALSE)
+        $this->form_validation->set_rules('pseudo', 'Pseudo', 'required');
+        $this->form_validation->set_rules('commentaire', 'Commentaire', 'required');
+        $this->form_validation->set_rules('lien', 'Lien', 'required');
+        $this->form_validation->set_rules('titre', 'Titre', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        var_dump($this->form_validation->set_rules('image', 'Image', 'required'));
+        return;
+        if ($this->form_validation->run() === FALSE)
         {
-            var_dump('Not ok');
+            $this->load->view('templates/header', $data);
+            $this->load->view('news/create');
+            $this->load->view('templates/footer');
+
         }
         else
         {
-            //Affichage de la liste + ajout
-            //$this->M_Post->ajouter();
-            //$dataLayout['vue'] = $this->load->view('lister', $dataList, true);
-            //$this->load->view('layout', $dataLayout);
-            var_dump('OK');
+            $this->news_model->set_news();
+            $this->load->view('news/success');
         }*/
+
+        $data['lien'] = $this->input->post('lien');
+        $data['commentaire'] = $this->input->post('commentaire');
+        $data['titre']=$this->input->post('titre');
+        $data['desciption']=$this->input->post('description');
+        $data['image']=$this->input->post('image');
+        $daat['id_membre']=$this->input->post('pseudo');
+
+        $this->M_Post->creer($data);
+        redirect('sucess.php');
     }
 
     //Pour éviter d'afficher dans l'url
@@ -123,6 +142,26 @@ class Post extends CI_Controller {
         curl_close($ch);
 
         return $data;
+    }
+
+    //Supprimer un lien
+    function delete($it)
+    {
+        // $this->M_Post->delet($it);
+
+        //Si l'appel de cette fct a été faite avec ajax ou pas
+        if($this->input->is_ajax_request())
+        {
+            echo 'Lien supprimé';
+        }
+        else
+        {
+            /*$data['vue'] = 'ok';
+            $this->load->view*/
+            //$this->load->view('ok');
+            echo "Pas d'ajax";
+           // redirect('post/ajouter');
+        }
     }
 
 }

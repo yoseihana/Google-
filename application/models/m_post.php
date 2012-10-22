@@ -23,22 +23,14 @@ class M_Post extends CI_Model
         return $query->result();
     }
 
-    public function créer()
+    public function creer($data)
     {
-       /*var_dump('ok');
-       //Chargement de la librairie
-        $this->load->helpers('url');
+        $sql = 'INSERT INTO post (id_membre, commentaire, image, titre, description) VALUES("'.$data["id_membre"].'","'.$data["commentaire"].'","'.$data["image"].'","'.$data["titre"].'","'.$data["description"].'")';
+        $this->db->query($sql);
+    }
 
-        //$slug = url_title($this->input->post('url'), 'dash', true);
-
-        //Donnée pour la DB dans un tableau
-        $data = array(
-            'pseudo'=> $this->input->post('pseudo'),
-            'commentaire'=>$this->textarea->post('commentaire'),
-             'url'=>$this->input->post('url')
-        );
-
-        //Insertion DB
-        return $this->db->insert('post', $data);*/
+    public function delete($id)
+    {
+        $this->db->delete($id);
     }
 }

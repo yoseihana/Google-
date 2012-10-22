@@ -64,6 +64,7 @@ $autoload['libraries'] = array('database', 'session');
 |	$autoload['helper'] = array('url', 'file');
 */
 
+//charger pour chacune des pages
 $autoload['helper'] = array('url');
 
 
