@@ -17,13 +17,13 @@ class M_Post extends CI_Model
     public function lister()
     {
         $this->db->select('*');
-        $this->db->from('post');
+        $this->db->from('posts');
 
         $query = $this->db->get();
         return $query->result();
     }
 
-    public function ajouter()
+    public function créer()
     {
        /*var_dump('ok');
        //Chargement de la librairie

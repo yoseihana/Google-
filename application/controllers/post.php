@@ -43,47 +43,32 @@ class Post extends CI_Controller {
         $this->load->model('M_Post');
         $dataList['posts']= $this->M_Post->lister();
 
-        echo $pseudo = $this->input->post('pseudo');
-        echo $commentaire = $this->input->post('commentaire');
-        echo $lien = $this->input->post('lien');
+        $lien = $this->input->post('lien');
 
+        //Appel la fct via l'objet m_post
+        $html = $this->file_get_contents_curl($lien);
 
-        //Initialisation de CULR
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $lien);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            $html = curl_exec($curl);
-            curl_close($curl);
+        $htmlDom = new DOMDocument();
 
-            $htmlDom = new DOMDocument();
-            $htmlDom->loadHTML($html);
+        //@ = cache les erreurs du HTML
+        @$htmlDom->loadHTML($html);
 
-            $DomNodeList = null;
-            $DomNodeList = $htmlDom->getElementsByTagName('title');
+        //intégartion du title
+        $DomNodeList = $htmlDom->getElementsByTagName('title');
+        $dataList['titre'] = $DomNodeList->item(0)->nodeValue;
 
-            $dataList['title'] = $DomNodeList->item(0);
-            var_dump($dataList['title']);
+        //Intégration du meta description
+        $DomNodeList = $htmlDom->getElementsByTagName("meta");
 
-        return
-         // Meta DomNodeList
-         $DomNodeList = $htmlDom->getElementsByTagName("meta");
-         var_dump($DomNodeList);
-         // Boucle sur les resultats du tag meta
-         for ($iMeta = 0; $iMeta < $DomNodeList->length; $iMeta++) {
-             // Meta DomNode attributes map
-             $iMetaAttrMap = $DomNodeList->item($iMeta)->attributes;
+        // Boucle sur les resultats du tag meta
+        foreach($DomNodeList as $node){
+            if(strtolower($node->getAttribute('name'))=='description'){
+                $dataList['description'] = $node->getAttribute('content');
+            }
+        }
 
-             // Si le tag meta a un attr name qui vaut 'description'
-             if (strtolower($iMetaAttrMap->getNamedItem('name')->nodeValue) == 'description') {
-                 // On récupère la valeur de l'attribut content
-                 var_dump($iMetaAttrMap->getNamedItem('content')->nodeValue);
-             }
-             $iMeta++;
-         }
-
-            //Intégration des éléments dans le $data via le ndeValue pour accéder à la valeur
-            $dataList['title'] = $dataList['title']->nodeValue;
-            $dataList['meta'] = $dataList['meta']->nodeValue;
+        //Intégration des img
+        $DomNodeList = $html->getElementsByTagName('img');
 
 
         //Intégration dans la vue de tous les éléments
@@ -91,14 +76,12 @@ class Post extends CI_Controller {
         $this->load->view('layout', $dataLayout);
     }
 
-    //TODO: fonction créer pour ajouter dans la DB
-
-    /*public function ajouter()
+    //Fonction pour ajouter dans la BD
+    public function créer()
     {
-
-        //Chargement des post
-       // $this->load->model('M_Post');
-       // $dataList['posts']= $this->M_Post->lister();
+       /* //Chargement des post
+        // $this->load->model('M_Post');
+        // $dataList['posts']= $this->M_Post->lister();
 
         //Chargement livbraire pour form et validation form
         $this->load->helpers(array('form', 'url'));
@@ -123,8 +106,25 @@ class Post extends CI_Controller {
             //$dataLayout['vue'] = $this->load->view('lister', $dataList, true);
             //$this->load->view('layout', $dataLayout);
             var_dump('OK');
-        }
-    }*/
+        }*/
+    }
+
+    //Pour éviter d'afficher dans l'url
+    private function file_get_contents_curl($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        return $data;
+    }
+
 }
 
 /* End of file welcome.php */

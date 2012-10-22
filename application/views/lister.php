@@ -4,18 +4,9 @@
     <h2>
         Lister les posts
     </h2>
+    <p><?php echo $titre; ?></p>
+   <p><?php echo $description ?></p>
 
-    <?php //echo validation_erros(); ?>
-
-    <?php echo form_open('form') ?>
-        <label for="auteur">Pseudo</label>
-        <input type="text" name="pseudo" value="pseudo" id="auteur"/ ></br>
-        <label for="comment">Commentaire</label></br>
-        <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"></textarea></br>
-        <label for="url">Lien à partager</label>
-        <input type="url" name="lien" value="http://" id="url" /></br>
-        <input type="submit" name="envoyer" value="Partager">
-    </form>
     <?php if(count($posts)): ?>
     <?php foreach($posts as $post): ?>
 	<div id="body">

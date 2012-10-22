@@ -16,6 +16,7 @@
     <input type="url" name="lien" value="http://" id="url" /></br>
     <input type="submit" name="envoyer" value="Partager">
     </form>
+
     <?php if(count($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div id="body">
