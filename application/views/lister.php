@@ -7,7 +7,7 @@
     <?php //echo validation_erros(); ?>
     <?php echo form_open('post/creer') ?>
     <label for="auteur">Pseudo</label>
-    <input type="text" name="pseudo" value="<?php echo $pseudo ?>" id="auteur"/ ></br>
+    <input type="text" name="id_membre" value="<?php echo $id_membre ?>" id="auteur"/ ></br>
     <label for="comment">Commentaire</label></br>
     <textarea cols="55" rows="10" id="comment" value="<?php echo $commentaire ?>" name="commentaire"></textarea></br>
     <label for="url">Lien à partager</label>

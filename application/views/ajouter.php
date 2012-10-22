@@ -8,7 +8,7 @@
 
     <?php echo form_open('post/lister') ?>
     <label for="auteur">Pseudo</label>
-    <input type="text" name="pseudo" value="pseudo" id="auteur"/ ></br>
+    <input type="text" name="id_membre" value="id_membre" id="auteur"/ ></br>
     <label for="comment">Commentaire</label></br>
     <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"></textarea></br>
     <label for="url">Lien à partager</label>

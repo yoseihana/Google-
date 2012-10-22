@@ -20,6 +20,11 @@ class Post extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+
+        if(!($this->session->userdata('logged_in')))
+        {
+            redirect('membre');
+        }
     }
 
     public function index()
@@ -80,7 +85,7 @@ class Post extends CI_Controller {
 
         }
 
-        $dataList['pseudo'] = $this->input->post('pseudo');
+        $dataList['id_membre'] = $this->input->post('id_membre');
         $dataList['commentaire'] = $this->input->post('commentaire');
         $dataList['url'] = $lien;
 
@@ -94,35 +99,14 @@ class Post extends CI_Controller {
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
-
-        /*$data['title'] = 'Create a news item';
-
-        $this->form_validation->set_rules('pseudo', 'Pseudo', 'required');
-        $this->form_validation->set_rules('commentaire', 'Commentaire', 'required');
-        $this->form_validation->set_rules('lien', 'Lien', 'required');
-        $this->form_validation->set_rules('titre', 'Titre', 'required');
-        $this->form_validation->set_rules('description', 'Description', 'required');
-        var_dump($this->form_validation->set_rules('image', 'Image', 'required'));
-        return;
-        if ($this->form_validation->run() === FALSE)
-        {
-            $this->load->view('templates/header', $data);
-            $this->load->view('news/create');
-            $this->load->view('templates/footer');
-
-        }
-        else
-        {
-            $this->news_model->set_news();
-            $this->load->view('news/success');
-        }*/
+        $this->load->model('M_Post');
 
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre']=$this->input->post('titre');
-        $data['desciption']=$this->input->post('description');
+        $data['description']=$this->input->post('description');
         $data['image']=$this->input->post('image');
-        $daat['id_membre']=$this->input->post('pseudo');
+        $daat['id_membre']=$this->input->post('id_membre');
 
         $this->M_Post->creer($data);
         redirect('sucess.php');
@@ -147,7 +131,7 @@ class Post extends CI_Controller {
     //Supprimer un lien
     function delete($it)
     {
-        // $this->M_Post->delet($it);
+        $this->M_Post->delet($it);
 
         //Si l'appel de cette fct a été faite avec ajax ou pas
         if($this->input->is_ajax_request())
