@@ -23,9 +23,11 @@ class M_Post extends CI_Model
         return $query->result();
     }
 
-    public function ajouter(){
+    public function ajouter()
+    {
+       /*var_dump('ok');
        //Chargement de la librairie
-        $this->load->helpers(array('form', 'url'));
+        $this->load->helpers('url');
 
         //$slug = url_title($this->input->post('url'), 'dash', true);
 
@@ -37,6 +39,6 @@ class M_Post extends CI_Model
         );
 
         //Insertion DB
-        return $this->db->insert('post', $data);
+        return $this->db->insert('post', $data);*/
     }
 }

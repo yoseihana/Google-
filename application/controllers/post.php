@@ -24,23 +24,33 @@ class Post extends CI_Controller {
 
     public function index()
 	{
-        $this->lister();
+        $this->ajouter();
 
 	}
+
+    public function ajouter()
+    {
+        $this->load->helper('form');
+        $dataList['title'] = "Ajouter un lien";
+
+
+        $dataLayout['vue'] = $this->load->view('ajouter', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
 
     public function lister()
     {
         $this->load->model('M_Post');
         $dataList['posts']= $this->M_Post->lister();
 
-     for($i = 0; $i<count($dataList['posts']); $i++)
-     {
-        $data = $dataList['posts'][$i];
+        echo $pseudo = $this->input->post('pseudo');
+        echo $commentaire = $this->input->post('commentaire');
+        echo $lien = $this->input->post('lien');
 
-         //foreach($dataList['posts'][$i] as $data){
-            $url = $data->url;
+
+        //Initialisation de CULR
             $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_URL, $lien);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
             $html = curl_exec($curl);
             curl_close($curl);
@@ -50,15 +60,14 @@ class Post extends CI_Controller {
 
             $DomNodeList = null;
             $DomNodeList = $htmlDom->getElementsByTagName('title');
-            //$DomNodeList = $htmlDom->getElementsByTagName('meta');
 
             $dataList['title'] = $DomNodeList->item(0);
+            var_dump($dataList['title']);
 
-         //var_dump($htmlDom->attributes->length);
-
+        return
          // Meta DomNodeList
          $DomNodeList = $htmlDom->getElementsByTagName("meta");
-
+         var_dump($DomNodeList);
          // Boucle sur les resultats du tag meta
          for ($iMeta = 0; $iMeta < $DomNodeList->length; $iMeta++) {
              // Meta DomNode attributes map
@@ -72,24 +81,27 @@ class Post extends CI_Controller {
              $iMeta++;
          }
 
+            //Intégration des éléments dans le $data via le ndeValue pour accéder à la valeur
             $dataList['title'] = $dataList['title']->nodeValue;
             $dataList['meta'] = $dataList['meta']->nodeValue;
 
-         $i++;
-        }
 
+        //Intégration dans la vue de tous les éléments
         $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
         $this->load->view('layout', $dataLayout);
     }
 
-    public function ajouter()
+    //TODO: fonction créer pour ajouter dans la DB
+
+    /*public function ajouter()
     {
+
         //Chargement des post
-        $this->load->model('M_Post');
-        $dataList['posts']= $this->M_Post->lister();
+       // $this->load->model('M_Post');
+       // $dataList['posts']= $this->M_Post->lister();
 
         //Chargement livbraire pour form et validation form
-        $this->load->helpers('form');
+        $this->load->helpers(array('form', 'url'));
         $this->load->library('form_validation');
 
         $data['title'] = "Ajouter un lien";
@@ -100,18 +112,19 @@ class Post extends CI_Controller {
         $this->form_validation->set_rules('lien', 'Lien', 'Obligatoire');
 
         //Si les champs contiennent qqch
-        if($this->form_validation->run() === FALSE)
+        if($this->form_validation->run() == FALSE)
         {
             var_dump('Not ok');
         }
         else
         {
             //Affichage de la liste + ajout
-            $this->M_Post->ajouter();
-            $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
-            $this->load->view('layout', $dataLayout);
+            //$this->M_Post->ajouter();
+            //$dataLayout['vue'] = $this->load->view('lister', $dataList, true);
+            //$this->load->view('layout', $dataLayout);
+            var_dump('OK');
         }
-    }
+    }*/
 }
 
 /* End of file welcome.php */

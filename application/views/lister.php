@@ -2,9 +2,11 @@
 <div id="container">
 	<h1>Bienvenue sur le site communautaire "Partage tes sites"!</h1>
     <h2>
-        Ajouter un post
+        Lister les posts
     </h2>
-    <?php echo validation_erros(); ?>
+
+    <?php //echo validation_erros(); ?>
+
     <?php echo form_open('form') ?>
         <label for="auteur">Pseudo</label>
         <input type="text" name="pseudo" value="pseudo" id="auteur"/ ></br>
