@@ -23,7 +23,7 @@ class Post extends CI_Controller {
 
         if(!($this->session->userdata('logged_in')))
         {
-            redirect('membre');
+           redirect('membre');
         }
     }
 
@@ -55,6 +55,7 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->model('M_Post');
         $dataList['posts']= $this->M_Post->lister();
+        $dataList['title'] = "Valider un lien";
 
         $lien = $this->input->post('lien');
 
@@ -87,7 +88,6 @@ class Post extends CI_Controller {
 
         }
 
-        $dataList['id_membre'] = $this->input->post('id_membre');
         $dataList['commentaire'] = $this->input->post('commentaire');
         $dataList['url'] = $lien;
 
@@ -102,16 +102,16 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('M_Post');
+        $data['id_membre'] = $this->session->userdata('logged_in')->id_membre;
 
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre']=$this->input->post('titre');
         $data['description']=$this->input->post('description');
         $data['image']=$this->input->post('image');
-        $daat['id_membre']=$this->input->post('id_membre');
 
         $this->M_Post->creer($data);
-        redirect('sucess.php');
+        redirect('post/ajouter');
     }
 
     //Pour éviter d'afficher dans l'url
@@ -133,7 +133,7 @@ class Post extends CI_Controller {
     //Supprimer un lien
     function delete($it)
     {
-        $this->M_Post->delet($it);
+        //$this->M_Post->delete($it);
 
         //Si l'appel de cette fct a été faite avec ajax ou pas
         if($this->input->is_ajax_request())

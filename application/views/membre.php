@@ -1,4 +1,4 @@
-<div id="membre">
+<div id="container">
     <h2>Connexion des membres</h2>
     <?php
     echo form_open('membre/login', array('method'=>'post'));
