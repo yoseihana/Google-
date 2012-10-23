@@ -36,7 +36,9 @@
                 <p><strong>Ce qu'en pense <?php echo $post->pseudo; ?> : </strong><?php echo $post->commentaire; ?></p>
                 <p class="porpos"><strong>A propose du site: </strong><?php echo $post->description; ?></p>
                 <p><?php echo anchor('post/voir/'.$post->id_post, 'Modifier le commentaire et/ou la descrition'); ?></p>
-                <p class="image"><?php echo img($post->image); ?></p>
+                <?php for($image=0; $image<count($posts); ++$image): ?>
+                <p class="image"><?php echo img(base_url('/uplaods/'.strtolower(str_replace(' ', '', $post->titre)).$image.'.jpg')); ?></p>
+                <?php endfor; ?>
                 <p><?php echo anchor("post/delete/".$post->id_post, 'X', array('class'=>'delete')); ?></p>
             </div>
             <?php endforeach; ?>

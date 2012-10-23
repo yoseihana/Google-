@@ -85,7 +85,7 @@ class Post extends CI_Controller {
         $DomNodeList = $htmlDom->getElementsByTagName('img');
         foreach($DomNodeList as $node){
             //TODO: sélection sur la taille de l'image
-            //var_dump(getimagesize($dataList['images']));
+            //var_dump($dataList['images']);
             $dataList['images'][] = $node->getAttribute('src');
 
         }
@@ -107,6 +107,9 @@ class Post extends CI_Controller {
         $this->load->library('upload');
         $this->load->library('image_lib');
 
+        $posts= $this->M_Post->lister();
+        $nbPosts = count($posts);
+
         //Reprise des données dans le formulaire
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
@@ -115,13 +118,14 @@ class Post extends CI_Controller {
         $data['image']=$this->input->post('image');
         $data['id_membre']=$this->input->post('membre');
 
-       // var_dump($data['image'].) TODO: voir le nbre d'image
-
         $content = file_get_contents($data['image']);
+        $titreImage = strtolower(str_replace(' ', '', $data['titre']));
+        for($image = 0; $image<$nbPosts; ++$image){
+            file_put_contents('./uploads/'.$titreImage.$image.'.jpg', $content);
+            $image++;
+        }
 
-        //for($image = 0; $image<)
-        file_put_contents('./uploads/t.jpg', $content);
-        //TODO: création d'une variable à plusieurs
+        //TODO resize Image (pas en CSS)
 
         $this->M_Post->creer($data);
         redirect('post/ajouter');
