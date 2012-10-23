@@ -54,6 +54,7 @@ class Post extends CI_Controller {
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->model('M_Post');
+        $this->load->library('image_lib');
         $dataList['posts']= $this->M_Post->lister();
 
         $lien = $this->input->post('lien');
@@ -88,7 +89,6 @@ class Post extends CI_Controller {
         }
 
         $dataList['id_membre'] = $this->input->post('id_membre');
-        $dataList['commentaire'] = $this->input->post('commentaire');
         $dataList['url'] = $lien;
 
         //Intégration dans la vue de tous les éléments
@@ -103,22 +103,23 @@ class Post extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('M_Post');
 
+        //Reprise des données dans le formulaire
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre']=$this->input->post('titre');
         $data['description']=$this->input->post('description');
         $data['image']=$this->input->post('image');
-        $daat['id_membre']=$this->input->post('id_membre');
+        $data['id_membre']=$this->input->post('membre');
 
         $this->M_Post->creer($data);
-        redirect('sucess.php');
+        redirect('post/ajouter');
     }
 
     //Pour éviter d'afficher dans l'url
     private function file_get_contents_curl($url)
     {
         $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -127,18 +128,25 @@ class Post extends CI_Controller {
         $data = curl_exec($ch);
         curl_close($ch);
 
+        //Gestion de l'erreur si l'URL donnée n'est pas bonne
+        if(!preg_match('#HTTP/1.1.200#', $data)){
+            redirect('error/error_lien');
+        }
+
         return $data;
     }
 
     //Supprimer un lien
     function delete($it)
     {
-        $this->M_Post->delet($it);
+        $this->load->model('M_Post');
+        $this->M_Post->delete($it);
 
         //Si l'appel de cette fct a été faite avec ajax ou pas
         if($this->input->is_ajax_request())
         {
             echo 'Lien supprimé';
+
         }
         else
         {

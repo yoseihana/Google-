@@ -19,6 +19,7 @@ class M_Post extends CI_Model
         $this->db->select ('posts.*, membre.*');
         $this->db->from ('posts');
         $this->db->join ('membre', 'posts.id_membre = membre.id_membre');
+        $this->db->order_by('id_post','desc');
 
         $query = $this->db->get();
         return $query->result();
@@ -38,6 +39,6 @@ class M_Post extends CI_Model
 
     public function delete($id)
     {
-        $this->db->delete($id);
+        $this->db->delete('posts', array('id_post'=>$id));
     }
 }
