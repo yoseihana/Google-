@@ -104,6 +104,10 @@ class Post extends CI_Controller {
         $this->load->model('M_Post');
 
         //Reprise des données dans le formulaire
+        if(!preg_match('#HTTP/1.1.200#', $this->input->post('lien')))
+        {
+            redirect('error/error_lien_ajout');
+        }
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre']=$this->input->post('titre');
@@ -137,7 +141,7 @@ class Post extends CI_Controller {
     }
 
     //Supprimer un lien
-    function delete($it)
+    public function delete($it)
     {
         $this->load->model('M_Post');
         $this->M_Post->delete($it);
@@ -156,6 +160,11 @@ class Post extends CI_Controller {
             echo "Pas d'ajax";
            // redirect('post/ajouter');
         }
+    }
+
+    public function modifier($id)
+    {
+
     }
 
 }

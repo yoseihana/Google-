@@ -22,4 +22,18 @@ class Error extends CI_Controller
         $dataLayout['vue'] = $this->load->view('error_lien', $dataList, true);
         $this->load->view('layout', $dataLayout);
     }
+
+    public function error_utilisateur()
+    {
+        $dataList['titre'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_utilisateur', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_lien_ajout()
+    {
+        $dataList['titre'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_lien_ajout', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
 }

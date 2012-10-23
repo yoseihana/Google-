@@ -33,7 +33,7 @@ class Membre extends CI_Controller {
             redirect('post/ajouter');
         }
         else{
-            redirect('error/mauvais_identifiant');
+            redirect('error/error_utilisateur');
         }
     }
 

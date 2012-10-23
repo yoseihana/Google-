@@ -360,3 +360,7 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+$config['image_library']='gd2';
+//$config['source_image'] = $source;
+$config['create_thumb'] = TRUE;
+$config['maintain_ratio'] = TRUE;

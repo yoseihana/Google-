@@ -41,4 +41,9 @@ class M_Post extends CI_Model
     {
         $this->db->delete('posts', array('id_post'=>$id));
     }
+
+    public function modifier($data, $id)
+    {
+        $this->db->update('posts', $data, array('id_post'=>$id));
+    }
 }
