@@ -5,7 +5,7 @@
     </h2>
 
     <?php //echo validation_erros(); ?>
-    <p>Bienvenue <?php echo $membre->pseudo; ?></p>
+    <p>Bienvenue à toi, <?php echo $membre->pseudo; ?></p>
     <?php echo form_open('post/lister') ?>
     <label for="comment">Commentaire</label></br>
     <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"></textarea></br>
