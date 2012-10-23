@@ -36,6 +36,7 @@ class Post extends CI_Controller {
 
     public function ajouter()
     {
+        $dataList['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Post');
@@ -49,6 +50,7 @@ class Post extends CI_Controller {
 
     public function lister()
     {
+        $dataList['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->model('M_Post');

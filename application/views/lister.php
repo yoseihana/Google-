@@ -4,12 +4,11 @@
     <h2>
         Lister les posts
     </h2>
+    <p>Bienvenue <?php echo $membre->pseudo; ?></p>
     <?php //echo validation_erros(); ?>
     <?php echo form_open('post/creer') ?>
-    <label for="auteur">Pseudo</label>
-    <input type="text" name="id_membre" value="<?php echo $id_membre ?>" id="auteur"/ ></br>
     <label for="comment">Commentaire</label></br>
-    <textarea cols="55" rows="10" id="comment" value="<?php echo $commentaire ?>" name="commentaire"></textarea></br>
+    <textarea cols="55" rows="10" id="comment" value="<?php echo $commentaire ?>" name="commentaire"><?php echo $commentaire ?></textarea></br>
     <label for="url">Lien à partager</label>
     <input type="url" name="lien" value="<?php echo $url ?>" id="url" /></br>
     <input type="submit" name="envoyer" value="Ajouter le lien">

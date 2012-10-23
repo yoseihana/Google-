@@ -19,4 +19,14 @@ class M_Membre extends CI_Model
         );
         return $query->num_rows();
     }
+
+    public function getMembre($email)
+    {
+        $this->db->select('*');
+        $this->db->from('membre');
+        $this->db->where('email', $email);
+
+        $query = $this->db->get();
+        return $query->row();
+    }
 }

@@ -20,6 +20,7 @@ class Membre extends CI_Controller {
     public function login()
     {
         $this->load->model('M_Membre');
+
         //Récupère un arrêt de données
         $data['mdp'] = $this->input->post('mdp');
         $data['email'] = $this->input->post('email');
@@ -27,7 +28,8 @@ class Membre extends CI_Controller {
         //Vérification si des données sont entrée
         if($this->M_Membre->verifier($data))
         {
-            $this->session->set_userdata('logged_in', true);
+            $info = $this->M_Membre->getMembre($data['email']);
+            $this->session->set_userdata('logged_in', $info);
             redirect('post/ajouter');
         }
         else{

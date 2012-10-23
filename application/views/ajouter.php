@@ -5,10 +5,8 @@
     </h2>
 
     <?php //echo validation_erros(); ?>
-
+    <p>Bienvenue <?php echo $membre->pseudo; ?></p>
     <?php echo form_open('post/lister') ?>
-    <label for="auteur">Pseudo</label>
-    <input type="text" name="id_membre" value="id_membre" id="auteur"/ ></br>
     <label for="comment">Commentaire</label></br>
     <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"></textarea></br>
     <label for="url">Lien à partager</label>
@@ -19,7 +17,7 @@
     <?php if(count($posts)): ?>
     <?php foreach($posts as $post): ?>
         <div id="body">
-            <h2>De: <?php echo $post->id_membre; ?></h2>
+            <h2>De: <?php echo $post->pseudo; ?></h2>
             <p>Commentaire: <?php echo $post->commentaire; ?></p>
             <h3>Le site: <?php echo $post->titre; ?></h3>
             <p>Description: <?php echo $post->description; ?></p>

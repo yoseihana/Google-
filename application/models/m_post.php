@@ -18,8 +18,7 @@ class M_Post extends CI_Model
     {
         $this->db->select ('posts.*, membre.*');
         $this->db->from ('posts');
-        $this->db->join ('membre');
-        $this->db->where('posts.id_membre = membre.id_membre');
+        $this->db->join ('membre', 'posts.id_membre = membre.id_membre');
 
         $query = $this->db->get();
         return $query->result();
