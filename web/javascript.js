@@ -14,7 +14,7 @@ $(function(){
             url:href,
             success: function(data){
                 console.log($this.parent());
-                $this.parent().text(data).fadeOut(5000);
+                $this.parent().parent().fadeOut(5000);
             }
         });
         event.preventDefault();

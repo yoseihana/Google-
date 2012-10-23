@@ -46,4 +46,14 @@ class M_Post extends CI_Model
     {
         $this->db->update('posts', $data, array('id_post'=>$id));
     }
+
+    public function voir($id)
+    {
+        $this->db->select('*');
+        $this->db->from('posts');
+        $this->db->where('id_post',$id);
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

@@ -19,7 +19,7 @@
         <?php for($i=0; $i<count($images); ++$i):?>
         <div class="images">
         <input type="radio" name="image" value="<?php echo $images[$i]; ?>" />
-        <p><?php echo img($images[$i]); ?></p>
+            <p><?php echo img($images[$i]); ?></p>
         </div>
         <?php endfor; ?>
         <input type="submit" name="envoyer" value="Ajouter le lien">
@@ -35,7 +35,7 @@
                 <h3><?php echo $post->pseudo; ?> a partagé le site: <?php echo $post->titre; ?></h3>
                 <p><strong>Ce qu'en pense <?php echo $post->pseudo; ?> : </strong><?php echo $post->commentaire; ?></p>
                 <p class="porpos"><strong>A propose du site: </strong><?php echo $post->description; ?></p>
-                <p><?php echo anchor('post/modifier/'.$post->id_post, 'Modifier le commentaire et/ou la descrition'); ?></p>
+                <p><?php echo anchor('post/voir/'.$post->id_post, 'Modifier le commentaire et/ou la descrition'); ?></p>
                 <p class="image"><?php echo img($post->image); ?></p>
                 <p><?php echo anchor("post/delete/".$post->id_post, 'X', array('class'=>'delete')); ?></p>
             </div>

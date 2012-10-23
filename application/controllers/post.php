@@ -84,6 +84,8 @@ class Post extends CI_Controller {
         //Intégration image
         $DomNodeList = $htmlDom->getElementsByTagName('img');
         foreach($DomNodeList as $node){
+            //TODO: sélection sur la taille de l'image
+            //var_dump(getimagesize($dataList['images']));
             $dataList['images'][] = $node->getAttribute('src');
 
         }
@@ -102,18 +104,24 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('M_Post');
+        $this->load->library('upload');
+        $this->load->library('image_lib');
 
         //Reprise des données dans le formulaire
-        if(!preg_match('#HTTP/1.1.200#', $this->input->post('lien')))
-        {
-            redirect('error/error_lien_ajout');
-        }
         $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre']=$this->input->post('titre');
         $data['description']=$this->input->post('description');
         $data['image']=$this->input->post('image');
         $data['id_membre']=$this->input->post('membre');
+
+       // var_dump($data['image'].) TODO: voir le nbre d'image
+
+        $content = file_get_contents($data['image']);
+
+        //for($image = 0; $image<)
+        file_put_contents('./uploads/t.jpg', $content);
+        //TODO: création d'une variable à plusieurs
 
         $this->M_Post->creer($data);
         redirect('post/ajouter');
@@ -162,8 +170,33 @@ class Post extends CI_Controller {
         }
     }
 
-    public function modifier($id)
+    public function voir()
     {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->model('M_Post');
+
+        $id = $this->uri->segment(3);
+
+        $data['post']= $this->M_Post->voir($id);
+
+        $dataLayout['vue'] = $this->load->view('voir', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function modifier()
+    {
+        $this->load->helper('form');
+        $this->load->model('M_Post');
+
+        $id = $this->input->post('id_post');
+
+        $data['commentaire'] = $this->input->post('commentaire');
+        $data['description'] = $this->input->post('description');
+
+        $this->M_Post->modifier($data, $id);
+        redirect('post/ajouter');
+
 
     }
 
