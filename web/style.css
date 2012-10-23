@@ -60,5 +60,10 @@ blockquote, q {
 ************************************************/
 
 body{
-    background-color: blue;
+    background-color: #F1F1F1;
+    margin: 0 auto;
+}
+
+.content{
+    background-color: #f5f5f5;
 }
