@@ -36,4 +36,11 @@ class Error extends CI_Controller
         $dataLayout['vue'] = $this->load->view('error_lien_ajout', $dataList, true);
         $this->load->view('layout', $dataLayout);
     }
+
+    public function error_ajax()
+    {
+        $dataList['titre'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_ajax', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
 }

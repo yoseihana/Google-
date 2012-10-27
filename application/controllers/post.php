@@ -30,7 +30,6 @@ class Post extends CI_Controller {
     public function index()
 	{
         $this->ajouter();
-        //$this->load->library('image_lib');
 
 	}
 
@@ -55,6 +54,7 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->model('M_Post');
         $this->load->library('image_lib');
+        $this->load->helper('url');
         $dataList['posts']= $this->M_Post->lister();
 
         $lien = $this->input->post('lien');
@@ -84,10 +84,19 @@ class Post extends CI_Controller {
         //Intégration image
         $DomNodeList = $htmlDom->getElementsByTagName('img');
         foreach($DomNodeList as $node){
-            //TODO: sélection sur la taille de l'image
-            //var_dump($dataList['images']);
-            $dataList['images'][] = $node->getAttribute('src');
 
+            $src = $node->getAttribute('src');
+
+            //Affichage de l'extention
+            $info = new SplFileInfo($src);
+
+            //N'affiche pas les gif et affiche uniquement entre 100px et 800px
+            if($info->getExtension() != 'gif'){
+                $size = getimagesize($src);
+                if($size[3] >= '100' || $size[3] <= '800'){
+                    $dataList['images'][] = $this->getAbsolute($src, $lien);
+                }
+            }
         }
 
         $dataList['id_membre'] = $this->input->post('id_membre');
@@ -121,7 +130,8 @@ class Post extends CI_Controller {
         $content = file_get_contents($data['image']);
         $titreImage = strtolower(str_replace(' ', '', $data['titre']));
         for($image = 0; $image<$nbPosts; ++$image){
-            file_put_contents('./uploads/'.$titreImage.$image.'.jpg', $content);
+
+            file_put_contents('./web/uploads/'.$titreImage.$image.'.jpg', $content);
             $image++;
         }
 
@@ -166,11 +176,7 @@ class Post extends CI_Controller {
         }
         else
         {
-            /*$data['vue'] = 'ok';
-            $this->load->view*/
-            //$this->load->view('ok');
-            echo "Pas d'ajax";
-           // redirect('post/ajouter');
+             redirect('error/error_ajax');
         }
     }
 
@@ -201,6 +207,32 @@ class Post extends CI_Controller {
         $this->M_Post->modifier($data, $id);
         redirect('post/ajouter');
 
+
+    }
+
+    /**
+     * @param $url
+     * @param $base
+     * @return string
+     */
+    public function getAbsolute($url, $base){
+
+        //Vérification du type de lien
+        if(parse_url($url, PHP_URL_SCHEME) != ''){
+            return $url;
+        }elseif($url[0] == '#' || $url[0]=='?'){
+            return $base.$url;
+        }
+
+        //Conversion de la variable locale
+        extract(parse_url($base));
+
+        $abs = ($url[0] == '/' ? '' : preg_replace('#/[^/]*$#', '', $path))."/$url";
+        $re  = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
+
+        //Rendu final de l'URL
+        for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n));
+        return $scheme.'://'.$host.str_replace('../', '', $abs);
 
     }
 
