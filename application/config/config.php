@@ -357,6 +357,14 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+/* Image resize
+*/
+$config['image_library'] = 'gd2';
+$config['maintain_ratio'] = TRUE;
+$config['width']	 = 150;
+$config['height']	= 50;
+
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

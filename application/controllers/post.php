@@ -94,7 +94,7 @@ class Post extends CI_Controller {
             if($info->getExtension() != 'gif'){
                 $size = getimagesize($src);
                 if($size[3] >= '100' || $size[3] <= '800'){
-                    $dataList['images'][] = $this->getAbsolute($src, $lien);
+                    $dataList['images'][] = $src;
                 }
             }
         }
@@ -114,7 +114,7 @@ class Post extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('M_Post');
         $this->load->library('upload');
-        $this->load->library('image_lib');
+        $this->load->library('image_lib', $config);
 
         $posts= $this->M_Post->lister();
         $nbPosts = count($posts);
@@ -172,7 +172,6 @@ class Post extends CI_Controller {
         if($this->input->is_ajax_request())
         {
             echo 'Lien supprimé';
-
         }
         else
         {
@@ -209,33 +208,6 @@ class Post extends CI_Controller {
 
 
     }
-
-    /**
-     * @param $url
-     * @param $base
-     * @return string
-     */
-    public function getAbsolute($url, $base){
-
-        //Vérification du type de lien
-        if(parse_url($url, PHP_URL_SCHEME) != ''){
-            return $url;
-        }elseif($url[0] == '#' || $url[0]=='?'){
-            return $base.$url;
-        }
-
-        //Conversion de la variable locale
-        extract(parse_url($base));
-
-        $abs = ($url[0] == '/' ? '' : preg_replace('#/[^/]*$#', '', $path))."/$url";
-        $re  = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-
-        //Rendu final de l'URL
-        for ($n = 1; $n > 0; $abs = preg_replace($re, '/', $abs, -1, $n));
-        return $scheme.'://'.$host.str_replace('../', '', $abs);
-
-    }
-
 }
 
 /* End of file welcome.php */
