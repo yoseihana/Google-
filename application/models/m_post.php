@@ -28,12 +28,13 @@ class M_Post extends CI_Model
     public function creer($data)
     {
         $sql = 'INSERT INTO posts
-                (id_membre, commentaire, image, titre, description) VALUES("'
+                (id_membre, commentaire, image, titre, description, lien) VALUES("'
                 .$data["id_membre"].'","'
                 .$data["commentaire"].'","'
                 .$data["image"].'","'
                 .$data["titre"].'","'
-                .$data["description"].'")';
+                .$data["description"].'","'
+                .$data["lien"].'")';
         $this->db->query($sql);
     }
 

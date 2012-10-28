@@ -77,7 +77,15 @@ class Post extends CI_Controller {
         // Boucle sur les resultats du tag meta
         foreach($DomNodeList as $node){
             if(strtolower($node->getAttribute('name'))=='description'){
-                $dataList['description'] = $node->getAttribute('content');
+
+                $content = $node->getAttribute('content');
+                if(isset($content)){
+                    $dataList['description'] = $node->getAttribute('content');
+                }else{
+                   $dataLayout['description'] = 'Il n\'y a pas de déscription pour ce site';
+                }
+            }else{
+                $dataLayout['description'] = 'Il n\'y a pas de déscription pour ce site';
             }
         }
 
@@ -91,12 +99,14 @@ class Post extends CI_Controller {
             $info = new SplFileInfo($src);
 
             //N'affiche pas les gif et affiche uniquement entre 100px et 800px
-            if($info->getExtension() != 'gif'){
-                $size = getimagesize($src);
-                if($size[3] >= '100' || $size[3] <= '800'){
-                    $dataList['images'][] = $src;
-                }
-            }
+             if(preg_match('/http/', $src)){
+                  if($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png'){
+                      $size = getimagesize($src);
+                      if($size[3] >= '150' || $size[3] <= '800'){
+                          $dataList['images'][] = $src;
+                      }
+                  }
+             }
         }
 
         $dataList['id_membre'] = $this->input->post('id_membre');
@@ -114,7 +124,7 @@ class Post extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('M_Post');
         $this->load->library('upload');
-        $this->load->library('image_lib', $config);
+        $this->load->library('image_lib');
 
         $posts= $this->M_Post->lister();
         $nbPosts = count($posts);
@@ -126,6 +136,7 @@ class Post extends CI_Controller {
         $data['description']=$this->input->post('description');
         $data['image']=$this->input->post('image');
         $data['id_membre']=$this->input->post('membre');
+        $data['url'] = $this->input->post('url');
 
         $content = file_get_contents($data['image']);
         $titreImage = strtolower(str_replace(' ', '', $data['titre']));
@@ -172,6 +183,7 @@ class Post extends CI_Controller {
         if($this->input->is_ajax_request())
         {
             echo 'Lien supprimé';
+
         }
         else
         {
