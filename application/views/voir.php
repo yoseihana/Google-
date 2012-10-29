@@ -1,5 +1,5 @@
 <div class="post">
-    <h3>Modifier le site partager: <?php echo $post[0]->titre; ?></h3>
+    <h2>Modifier le site partager: <?php echo $post[0]->titre; ?></h2>
     <?php echo form_open('post/modifier') ?>
     <label for="comment">Ce que vous en pensez</label></br>
     <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"><?php echo $post[0]->commentaire; ?></textarea></br>

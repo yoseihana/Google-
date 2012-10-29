@@ -67,7 +67,7 @@ body{
     font-family: Helvetica, Arial, sans-serif;
 }
 
-#container{
+#container, #membre, .post{
     background-color: white;
     position: relative;
 }
@@ -77,6 +77,12 @@ h1{
     font-size: 2em;
     padding: 1em;
     text-align: center;
+    text-decoration: none;
+}
+
+h1 a{
+    color: #4A8CF6;
+    text-decoration: none;
 }
 
 h2{
@@ -91,6 +97,10 @@ h2{
     padding: 1em;
     margin: 1em;
     background-color: #F2F2F2;
+}
+
+.post{
+    position: relative;
 }
 
 h3{
@@ -114,4 +124,44 @@ img
 
 .modifier{
     float: right;
+    margin-top: -12em;
+    margin-right: -5em;
+}
+
+.modifier p:first-child{
+    background-image: url('./img/trash.png');
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 66px;
+}
+
+.modifier p+p{
+    background-image: url('./img/update.png');
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+}
+
+.modifier p a{
+    width: 50px;
+    height: 66px;
+    display: inline-block;
+    text-indent: -99999px;
+}
+
+#membre{
+    padding: 1em;
+}
+
+#membre label{
+    cursor: default;
+    width: 125px;
+    display: inline-block;
+}
+
+#membre input{
+    border-radius: 2px;
+    background: 1px solid #DEDEDE;
+    margin-top: 1em;
+    color: #3A3A3A;
 }

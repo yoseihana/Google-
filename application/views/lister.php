@@ -33,14 +33,13 @@
                 <h3><?php echo $post->pseudo; ?> a partagé le site: <?php echo $post->titre; ?></h3>
                 <p><strong>Ce qu'en pense <?php echo $post->pseudo; ?> : </strong><?php echo $post->commentaire; ?></p>
                 <p class="porpos"><strong>A propose du site: </strong><?php echo $post->description; ?></p>
-                <p><?php echo anchor('post/voir/'.$post->id_post, 'Modifier le commentaire et/ou la descrition'); ?></p>
                 <p class="image">
-                <?php //for($image=0; $image<count($posts); ++$image): ?>
-                <?php //echo img('web/uploads/'.strtolower(str_replace(' ', '', $post->titre)).$image.'.jpg'); ?>
-                <?php //endfor; ?>
                 <?php echo img($post->image); ?>
                 </p>
-                <p><?php echo anchor("post/delete/".$post->id_post, 'X', array('class'=>'delete')); ?></p>
+                <div class="modifier">
+                    <p><?php echo anchor("post/delete/".$post->id_post, 'X', array('class'=>'delete')); ?></p>
+                    <p><?php echo anchor('post/voir/'.$post->id_post, 'Modifier'); ?></p>
+                </div>
             </div>
             <?php endforeach; ?>
         <?php endif; ?>
