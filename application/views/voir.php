@@ -9,5 +9,5 @@
 
     <input type="submit" value="Modifier!"/>
     </form>
-    <?php echo anchor("post/ajouter/", 'Retour sur a page d\'accueil'); ?>
+    <?php echo anchor("post/lister/", 'Retour sur a page d\'accueil'); ?>
 </div>
