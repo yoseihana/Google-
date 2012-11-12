@@ -3,6 +3,7 @@ Options -Indexes
 
 #   Active le module de réécriture d'URL.
 RewriteEngine on
+RewriteBase /
 
 #
 #   Fixe les règles de réécriture d'URL. Ici, nous utilisons une liste blanche.

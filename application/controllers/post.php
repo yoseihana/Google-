@@ -2,21 +2,6 @@
 
 class Post extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function __construct()
     {
         parent::__construct();
@@ -35,21 +20,26 @@ class Post extends CI_Controller {
 
     public function lister()
     {
-        $dataList['membre'] = $this->session->userdata('logged_in');
+        $data['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Post');
-        $dataList['posts']= $this->M_Post->lister();
-        $dataList['title'] = "Ajouter un lien";
+        $data['posts']= $this->M_Post->lister();
+        $data['title'] = "Ajouter un nouveau lien";
 
+        foreach($data['posts'] as $post){
+            if(!(fopen($post->image, 'r'))){
+                $post->image = 'web/img/no-pre.png';
+            }
+        }
 
-        $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
+        $dataLayout['vue'] = $this->load->view('lister', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
     public function ajouter()
     {
-        $dataList['membre'] = $this->session->userdata('logged_in');
+        $data['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->model('M_Post');
@@ -60,7 +50,6 @@ class Post extends CI_Controller {
 
         //Appel la fct via l'objet m_post
         $html = $this->file_get_contents_curl($lien);
-
         $htmlDom = new DOMDocument();
 
         //@ = cache les erreurs du HTML
@@ -68,7 +57,8 @@ class Post extends CI_Controller {
 
         //intégartion du title
         $DomNodeList = $htmlDom->getElementsByTagName('title');
-        $dataList['titre'] = $DomNodeList->item(0)->nodeValue;
+        $data['titre'] = $DomNodeList->item(0)->nodeValue;
+        $data['title'] = 'Ajout d\'un lien '.$data['titre'];
 
         //Intégration du meta description
         $DomNodeList = $htmlDom->getElementsByTagName('meta');
@@ -76,43 +66,41 @@ class Post extends CI_Controller {
         // Boucle sur les resultats du tag meta
         foreach($DomNodeList as $node){
             if(strtolower($node->getAttribute('name'))=='description'){
-
                 $content = $node->getAttribute('content');
                 if(isset($content)){
-                    $dataList['description'] = $node->getAttribute('content');
+                    $data['description'] = $node->getAttribute('content');
                 }else{
-                   $dataLayout['description'] = 'Il n\'y a pas de déscription pour ce site';
+                   $data['description'] = 'Il n\'y a pas de déscription pour ce site';
                 }
             }else{
-                $dataLayout['description'] = 'Il n\'y a pas de déscription pour ce site';
+                $data['description'] = 'Il n\'y a pas de déscription pour ce site';
             }
         }
 
         //Intégration image
         $DomNodeList = $htmlDom->getElementsByTagName('img');
         foreach($DomNodeList as $node){
-
             $src = $node->getAttribute('src');
+            $src = $this->relAbs($lien, $src);
 
             //Affichage de l'extention
             $info = new SplFileInfo($src);
 
-            //N'affiche pas les gif et affiche uniquement entre 100px et 800px
-             if(preg_match('/http/', $src)){
-                  if($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png'){
-                      $size = getimagesize($src);
+            $size = getimagesize($src);
+
+            //Affiche les images de format spécifique et affiche uniquement entre 100px et 800px
+                  if($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif'){
                       if($size[0] >= '150' && $size[0] <= '800'){
-                          $dataList['images'][] = $src;
+                          $data['images'][] = $src;
                       }
                   }
              }
-        }
 
-        $dataList['id_membre'] = $this->input->post('id_membre');
-        $dataList['url'] = $lien;
+        $data['id_membre'] = $this->input->post('id_membre');
+        $data['url'] = $lien;
 
         //Intégration dans la vue de tous les éléments
-        $dataLayout['vue'] = $this->load->view('ajouter', $dataList, true);
+        $dataLayout['vue'] = $this->load->view('ajouter', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
@@ -179,31 +167,36 @@ class Post extends CI_Controller {
         $this->M_Post->delete($it);
 
         //Si l'appel de cette fct a été faite avec ajax ou pas
-        if($this->input->is_ajax_request())
-        {
+        if($this->input->is_ajax_request()){
             echo 'Lien supprimé';
-
-        }
-        else
-        {
+        }else{
              redirect('error/error_ajax');
         }
     }
 
+    //Voir le post pour le modifier
     public function voir()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('M_Post');
 
+        //Récupération de l'ID via l'url, la 3ème partie
         $id = $this->uri->segment(3);
 
-        $data['post']= $this->M_Post->voir($id);
+        $post = $this->M_Post->voir($id);
+
+        $data['titre'] = $post->titre;
+        $data['title'] = 'Modifier le post: '.$data['titre'];
+        $data['commentaire'] = $post->commentaire;
+        $data['description'] = $post->description;
+        $data['id_post'] = $post->id_post;
 
         $dataLayout['vue'] = $this->load->view('voir', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
+    //Modification du post
     public function modifier()
     {
         $this->load->helper('form');
@@ -216,10 +209,32 @@ class Post extends CI_Controller {
 
         $this->M_Post->modifier($data, $id);
         redirect('post/lister');
+    }
 
+    //Correction des liens relatifs en absolus
+    function relAbs ($url, $lien)
+    {
+        if ($lien){
+            if (strstr($lien, 'http://') !== false || strstr($lien, 'https://') !== false){
+                return $lien;
+            }
+        }else{
+            return null;
+        }
 
+        if (!$url){
+            return null;
+        }
+
+        if ($url[strlen($url)-1] !== '/'){
+            $url .= '/';
+        }
+
+        if ($lien[0] == '/'){
+            $lien = substr($lien, 1);
+        }
+
+        return $url.$lien;
     }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* Location: ./application/controllers/post.php */

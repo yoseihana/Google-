@@ -2,6 +2,7 @@
     <h1>Bienvenue sur le site communautaire "Partage tes sites"!</h1>
     <div class="form">
         <h2>Bienvenue à toi, <?php echo $membre->pseudo; ?></h2>
+        <p><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
         <?php echo form_open('post/ajouter') ?>
         <label for="url">Lien à partager</label>
         <input type="url" name="lien" value="http://www.monlien.com" size="55" id="url" /></br>

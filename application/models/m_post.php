@@ -55,6 +55,6 @@ class M_Post extends CI_Model
         $this->db->where('id_post',$id);
 
         $query = $this->db->get();
-        return $query->result();
+        return $query->row();
     }
 }

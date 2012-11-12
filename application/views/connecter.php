@@ -14,4 +14,5 @@
     echo form_submit('check', 'Vérifier');
     echo form_close();
     ?>
+    <p><?php echo anchor('membre/ajoutermembre', 'Créer un compte'); ?></p>
 </div>

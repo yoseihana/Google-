@@ -2,6 +2,7 @@
 	<h1><?php echo anchor(base_url('index.php/post/lister'), 'Bienvenue sur le site communautaire "Partage tes sites"!', array('title'=>'Accueil du site de partage')); ?></h1>
     <div class="form">
         <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>?</h2>
+        <p><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
         <p><?php echo anchor(base_url('index.php/post/lister'), 'Retour à la page d\'acceuil', array('title'=>'Accueil du site de partage')); ?></p>
         <?php echo form_open('post/creer') ?>
         <label for="comment">Commentaire</label></br>

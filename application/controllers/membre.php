@@ -12,7 +12,7 @@ class Membre extends CI_Controller {
     public function index()
     {
         $this->load->helper('form');
-        $data['titre'] = 'Se connecter à Partage ton lien';
+        $data['title'] = 'Se connecter à Partage ton lien';
         $data['vue'] = $this->load->view('connecter', $data, true);
         $this->load->view('layout', $data);
     }
@@ -24,6 +24,7 @@ class Membre extends CI_Controller {
         //Récupère un arrêt de données
         $data['mdp'] = $this->input->post('mdp');
         $data['email'] = $this->input->post('email');
+        $data['title'] = 'Se connecter à Partage ton lien';
 
         //Vérification si des données sont entrée
         if($this->M_Membre->verifier($data))
@@ -41,5 +42,44 @@ class Membre extends CI_Controller {
     {
         $this->session->unset_userdata('logged_in');
         redirect('membre');
+    }
+
+    public function ajoutermembre(){
+        $this->load->helper('form');
+        $this->load->helper('html');
+        $this->load->model('M_Membre');
+        $dataList['title'] = "S'inscrire sur le site Partage ton site";
+
+
+        $dataLayout['vue'] = $this->load->view('ajoutermembre', $dataList, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function creer(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->model('M_Membre');
+
+        $email = $this->input->post('email');
+        $pseudo = $this->input->post('pseudo');
+
+        if($this->M_Membre->isMailExist($email)){
+
+            redirect('error/error_membre_mail');
+
+        }else{
+            if($this->M_Membre->isPseudoExist($pseudo)){
+                redirect('error/error_membre_pseudo');
+            }else{
+                //Reprise des données dans le formulaire
+                $data['pseudo'] = $this->input->post('pseudo');
+                $data['email'] = $this->input->post('email');
+                $data['mdp']=$this->input->post('mdp');
+
+                $this->M_Membre->creer($data);
+
+                echo 'Inscription ok';
+            }
+        }
     }
 }

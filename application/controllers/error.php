@@ -11,36 +11,50 @@ class Error extends CI_Controller
 {
     public function index()
     {
-        $data['titre'] = 'Erreur de lien';
+        $data['title'] = 'Erreur de lien';
         $data['vue'] = $this->load->view('error_lien', $data, true);
         $this->load->view('layout', $data);
     }
 
     public function error_lien()
     {
-        $dataList['titre'] = 'Erreur de lien';
-        $dataLayout['vue'] = $this->load->view('error_lien', $dataList, true);
+        $data['title'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_lien', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
     public function error_utilisateur()
     {
-        $dataList['titre'] = 'Erreur de lien';
-        $dataLayout['vue'] = $this->load->view('error_utilisateur', $dataList, true);
+        $data['title'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_utilisateur', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
     public function error_lien_ajout()
     {
-        $dataList['titre'] = 'Erreur de lien';
-        $dataLayout['vue'] = $this->load->view('error_lien_ajout', $dataList, true);
+        $data['title'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_lien_ajout', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
     public function error_ajax()
     {
-        $dataList['titre'] = 'Erreur de lien';
-        $dataLayout['vue'] = $this->load->view('error_ajax', $dataList, true);
+        $data['title'] = 'Erreur de lien';
+        $dataLayout['vue'] = $this->load->view('error_ajax', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_membre_mail()
+    {
+        $data['title'] = 'Erreur d\'e-mail';
+        $dataLayout['vue'] = $this->load->view('error_membre_mail', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_membre_pseudo()
+    {
+        $data['title'] = 'Erreur de pseudo';
+        $dataLayout['vue'] = $this->load->view('error_membre_pseudo', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 }

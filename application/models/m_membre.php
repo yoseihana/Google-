@@ -29,4 +29,37 @@ class M_Membre extends CI_Model
         $query = $this->db->get();
         return $query->row();
     }
+
+    public function isMailExist($email){
+        $this->db->select('email');
+        $this->db->from('membre');
+        $this->db->where('email',$email);
+
+        $query = $this->db->get();
+
+        return $query->num_rows();
+    }
+
+    public function isPseudoExist($pseudo){
+        $this->db->select('pseudo');
+        $this->db->from('membre');
+        $this->db->where('pseudo',$pseudo);
+
+        $query = $this->db->get();
+
+        return $query->num_rows();
+    }
+
+    public function creer($data){
+
+        $this->db->insert('membre',
+            array(
+            'pseudo' => $data['pseudo'] ,
+            'email' => $data['email'],
+            'mdp' => $data['mdp']
+        ));
+
+        $query = $this->db->get();
+        return $query->row();
+    }
 }
