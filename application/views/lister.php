@@ -2,7 +2,7 @@
     <h1>Bienvenue sur le site communautaire "Partage tes sites"!</h1>
     <div class="form">
         <h2>Bienvenue à toi, <?php echo $membre->pseudo; ?></h2>
-        <?php echo form_open('post/lister') ?>
+        <?php echo form_open('post/ajouter') ?>
         <label for="url">Lien à partager</label>
         <input type="url" name="lien" value="http://www.monlien.com" size="55" id="url" /></br>
         <input type="submit" name="envoyer" value="Partager">
@@ -21,7 +21,7 @@
                     <p><?php echo anchor('post/voir/'.$post->id_post, 'Modifier'); ?></p>
                 </div>
             </div>
-            <?php echo form_open('post/lister') ?>
+            <?php echo form_open('post/ajouter') ?>
                 <input type="hidden" value="<?php echo $post->titre ?>" />
                 <input type="hidden" value="<?php echo $post->pseudo ?>" />
                 <input type="hidden" value="<?php echo $post->commentaire ?>" />

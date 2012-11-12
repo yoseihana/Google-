@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'google';
+$db['default']['hostname'] = 'sql.olympe.in';
+$db['default']['username'] = '6kYr9nLS';
+$db['default']['password'] = '3decembre';
+$db['default']['database'] = '6kYr9nLS';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

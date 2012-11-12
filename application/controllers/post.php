@@ -29,11 +29,11 @@ class Post extends CI_Controller {
 
     public function index()
 	{
-        $this->ajouter();
+        $this->lister();
 
 	}
 
-    public function ajouter()
+    public function lister()
     {
         $dataList['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('form');
@@ -43,11 +43,11 @@ class Post extends CI_Controller {
         $dataList['title'] = "Ajouter un lien";
 
 
-        $dataLayout['vue'] = $this->load->view('ajouter', $dataList, true);
+        $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
         $this->load->view('layout', $dataLayout);
     }
 
-    public function lister()
+    public function ajouter()
     {
         $dataList['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('html');
@@ -55,7 +55,6 @@ class Post extends CI_Controller {
         $this->load->model('M_Post');
         $this->load->library('image_lib');
         $this->load->helper('url');
-        $dataList['posts']= $this->M_Post->lister();
 
         $lien = $this->input->post('lien');
 
@@ -102,7 +101,7 @@ class Post extends CI_Controller {
              if(preg_match('/http/', $src)){
                   if($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png'){
                       $size = getimagesize($src);
-                      if($size[3] >= '150' || $size[3] <= '800'){
+                      if($size[0] >= '150' && $size[0] <= '800'){
                           $dataList['images'][] = $src;
                       }
                   }
@@ -113,7 +112,7 @@ class Post extends CI_Controller {
         $dataList['url'] = $lien;
 
         //Intégration dans la vue de tous les éléments
-        $dataLayout['vue'] = $this->load->view('lister', $dataList, true);
+        $dataLayout['vue'] = $this->load->view('ajouter', $dataList, true);
         $this->load->view('layout', $dataLayout);
     }
 
@@ -149,7 +148,7 @@ class Post extends CI_Controller {
         //TODO resize Image (pas en CSS)
 
         $this->M_Post->creer($data);
-        redirect('post/ajouter');
+        redirect('post/lister');
     }
 
     //Pour éviter d'afficher dans l'url
@@ -216,7 +215,7 @@ class Post extends CI_Controller {
         $data['description'] = $this->input->post('description');
 
         $this->M_Post->modifier($data, $id);
-        redirect('post/ajouter');
+        redirect('post/lister');
 
 
     }

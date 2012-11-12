@@ -13,7 +13,7 @@ class Membre extends CI_Controller {
     {
         $this->load->helper('form');
         $data['titre'] = 'Se connecter à Partage ton lien';
-        $data['vue'] = $this->load->view('membre', $data, true);
+        $data['vue'] = $this->load->view('connecter', $data, true);
         $this->load->view('layout', $data);
     }
 
@@ -30,7 +30,7 @@ class Membre extends CI_Controller {
         {
             $info = $this->M_Membre->getMembre($data['email']);
             $this->session->set_userdata('logged_in', $info);
-            redirect('post/ajouter');
+            redirect('post/lister');
         }
         else{
             redirect('error/error_utilisateur');

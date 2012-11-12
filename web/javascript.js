@@ -9,12 +9,10 @@ $(function(){
     $(".delete").on("click", function(event){
         var href= $(this).attr("href");
         var $this = $(this);
-        console.log(href);
         $.ajax({
             url:href,
             success: function(data){
-                console.log($this.parent());
-                $this.parent().parent().fadeOut(5000);
+                $this.parent().parent().parent().fadeOut(5000);
             }
         });
         event.preventDefault();
