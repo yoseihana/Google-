@@ -1,14 +1,22 @@
-<div class="post">
-    <p><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
-    <h2>Modifier le site partager: <?php echo $titre; ?></h2>
-    <?php echo form_open('post/modifier') ?>
-    <label for="comment">Ce que vous en pensez</label></br>
-    <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"><?php echo $commentaire; ?></textarea></br>
-    <label for="describ">A propose du site:</label></br>
-    <textarea cols="55" rows="10" name="description" id="describ" value="<?php echo $description ?>"/><?php echo $description ?></textarea></br>
-    <input type="hidden" name="id_post" value="<?php echo $id_post ?>"/>
-
-    <input type="submit" value="Modifier!"/>
-    </form>
-    <?php echo anchor("post/lister/", 'Retour sur a page d\'accueil'); ?>
+<h1>Modifier le site partagé: <?php echo $titre; ?></h1>
+<div class="postModifcation">
+    <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
+    <p>Tu désires modifier une information sur votre post?</p>
+    <?php
+    echo form_open('post/modifier', array('method'=>'post'));
+    echo '<div class="bouton">';
+    echo form_label('Modification de ton commentaire', 'commentaire');
+    $commentaireText = array('name'=>'commentaire', 'value'=> $commentaire, 'cols'=>'57', 'rows'=>'5', 'id'=>'commentaire');
+    echo form_textarea($commentaireText);
+    echo '</div>';
+    echo '<div class="bouton">';
+    echo form_label('Modification de la déscription du site', 'description');
+    $descriptionText = array('name'=>'description', 'value'=> $description, 'cols'=>'57', 'rows'=>'5', 'id'=>'description');
+    echo form_textarea($descriptionText);
+    echo '</div>';
+    echo form_hidden('id_post', $id_post);
+    echo form_submit('Modifier', 'Modifier!');
+    echo form_button('Retour', anchor('post/lister', 'Retour', array('title'=>'Retour sur a page d\'accueil', 'alt'=>'Retour sur a page d\'accueil')));
+    echo form_close();
+    ?>
 </div>

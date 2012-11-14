@@ -1,0 +1,260 @@
+/************************************************
+/* RESTE MEYER
+************************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+/* remember to define focus styles! */
+:focus {
+    outline: 0;
+}
+
+body {
+    line-height: 1;
+    color: black;
+    background: white;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: "";
+}
+
+blockquote, q {
+    quotes: "" "";
+}
+
+/************************************************
+/* FIN RESTE MEYER
+************************************************/
+@bodyColor: #D9D9D9;
+@contentColor: #FFFFFF;
+@titleColor: #5F9AB9;
+@border: 1px solid #F8F9FA;
+@textColor: #7D7C7C;
+@gardient: linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientLinear: -o-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientMoz: -moz-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientWebk: -webkit-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientMs: -ms-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@boxShadow: 3px 3px 9px #646370;
+@borderRWebK: 6px;
+@borderRMoz: 6px;
+@borderR: 6px;
+@textColorButton: #F8F9FA;
+
+
+body{
+    background-color: @bodyColor;
+    margin: 1em auto;
+    font-size: 16px;
+    width: 950px;
+    color: @textColor;
+    font-size: 14px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#membre, .post, .postModifcation{
+    background-color: @contentColor;
+    position: relative;
+    border: @border;
+    box-shadow:@boxShadow;
+}
+
+#membre, .postModifcation{
+  width: 400px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+h1{
+    color: @titleColor;
+    font-size: 2em;
+    padding: 0.5em;
+    text-align: center;
+    text-decoration: none;
+}
+
+h1 a{
+    color: @titleColor;
+    text-decoration: none;
+}
+
+h2{
+    color: @titleColor;
+    font-weight: bold;
+    margin: 0.5em 0;
+    float: left;
+}
+
+.post, .postSubmit{
+    //border: 1px solid gray;
+    padding: 1em;
+    margin: 1em;
+}
+
+.form{
+  margin: 1em 0;
+  padding: 1em;
+}
+
+a{
+  text-decoration: none;
+  color: @textColor;
+}
+
+.post{
+    position: relative;
+}
+
+h3{
+    color: @titleColor;
+    margin: 0.5em 0;
+}
+
+p{
+    margin: 0.5em 0 1em 0;
+}
+/*  Formulaire de modification */
+label{
+  color: @contentColor;
+}
+
+/* Log Off */
+.logOff{
+  text-align: right;
+}
+
+.logOff a{
+  font-weight: lighter;
+  text-decoration: underline;
+}
+
+.logOff a:hover{
+  color: @titleColor;
+}
+
+/*  Listing du post */
+.pseudo{
+  color: @titleColor;
+  font-size: 1.5em;
+}
+
+.modifier{
+  height: 25px;
+}
+
+.modifier p a:hover{
+  text-decoration: underline;
+  color: @titleColor;
+}
+
+.modifier p{
+  display: inline-block;
+  margin-right: 2em;
+  float: right;
+}
+
+img
+{
+  max-width: 800px;
+}
+
+.site a{
+  text-decoration: none;
+  color: @titleColor;
+  font-weight: bold;
+}
+
+.infoSite{
+  border-top: 1px solid #E3D8D8;
+  border-bottom: 1px solid #E3D8D8;
+  padding: 16px O;
+}
+
+/* Connexion membre et ajouter membre*/
+.bouton{
+  background-image: @gardient;
+  background-image: @gardientLinear;
+  background-image: @gardientMoz;
+  background-image: @gardientWebk;
+  background-image: @gardientMs;
+  padding: 0.5em;
+  borer: @border;
+  box-shadow:@boxShadow;
+}
+
+.lien input[type=text]{
+  width: 600px;
+}
+
+.lien input[type=submit]{
+  border: @border;
+  width: 225px;
+  box-shadow:1px 1px 8px #545F6B;
+  margin-right: 2em;
+}
+
+input{
+    width: 375px;
+    height: 21px;
+    color: @textColor;
+}
+
+input[type=submit], button{
+  width: 125px;
+  height: 28px;
+  background-image: @gardient;
+  background-image: @gardientLinear;
+  background-image: @gardientMoz;
+  background-image: @gardientWebk;
+  background-image: @gardientMs;
+  color: @textColorButton;
+}
+
+#membre input[type=submit], button, .postModifcation input[type=submit]{
+  -webkit-border-radius: @borderRWebK;
+  -moz-border-radius: @borderRMoz;
+  border-radius: @borderR;
+  margin-top: 1em;
+  box-shadow: @boxShadow;
+}
+
+input[type=submit]{
+  float: right;
+}
+
+button a{
+  color: @textColorButton;
+}
