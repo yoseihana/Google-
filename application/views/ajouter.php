@@ -1,7 +1,7 @@
 <div id="container">
 	<h1><?php echo anchor(base_url('index.php/post/lister'), 'Bienvenue sur le site communautaire "Partage tes sites"!', array('title'=>'Accueil du site de partage')); ?></h1>
-    <div class="form">
-        <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo $url ?></h2>
+    <div class="post">
+        <h2 class="ajout">Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title'=>'Aller sur le site '.$url, 'alt'=>'Aller sur le site '.$url)); ?></h2>
         <!--<p><?php //echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
         <p><?php //echo anchor(base_url('index.php/post/lister'), 'Retour à la page d\'acceuil', array('title'=>'Accueil du site de partage')); ?></p>
         <?php //echo form_open('post/creer') ?>
@@ -34,37 +34,38 @@
     <?php
     echo form_open('post/creer', array('method'=>'post'));
     echo '<div class="bouton">';
-    echo form_label('Modification de ton commentaire', 'commentaire');
-    $commentaireText = array('name'=>'commentaire', 'value'=> 'commentaire', 'cols'=>'57', 'rows'=>'5', 'id'=>'commentaire');
+    $commentaireText = array('name'=>'commentaire', 'value'=> 'Ton commentaire', 'cols'=>'55', 'rows'=>'5', 'id'=>'commentaire');
     echo form_textarea($commentaireText);
     echo '</div>';
     echo '<div class="bouton">';
-    $titreInput = array('name'=>'titre', 'id'=>'title', 'value'=> $titre);
+    $titreInput = array('name'=>'titre', 'id'=>'title', 'value'=> $titre, 'class'=>'formAjout');
     echo form_input($titreInput);
     echo '</div>';
     echo '<div class="bouton">';
-    echo form_label('Modification de la déscription du site', 'description');
-    $descriptionText = array('name'=>'description', 'value'=> $description, 'cols'=>'57', 'rows'=>'5', 'id'=>'description');
+    $descriptionText = array('name'=>'description', 'value'=> $description, 'cols'=>'55', 'rows'=>'5', 'id'=>'description');
     echo form_textarea($descriptionText);
     echo '</div>';
      ?>
+    <div class="images">
      <?php if(isset($images)): ?>
         <?php for($i=0; $i<count($images); ++$i):?>
-            <div class="images">
+            <div class="inputImg">
                 <input type="radio" name="image" value="<?php echo $images[$i]; ?>" <?php echo set_radio('image', $images[$i]); ?>  />
                 <p><?php echo img($images[$i]); ?></p>
             </div>
             <?php endfor; ?>
         <?php else: ?>
-        <div class="images">
+        <div class="inputImg">
             <p><?php echo img(base_url('web/img/no-pre.png')); ?></p>
         </div>
     <?php endif; ?>
+    </div>
+        <div class="boutton">
     <?php echo form_hidden('membre', $membre->id_membre);
         echo form_submit('Envoyer', 'Ajouter ce lien!');
         echo form_button('Retour', anchor('post/lister', 'Retour', array('title'=>'Retour sur a page d\'accueil', 'alt'=>'Retour sur a page d\'accueil')));
     echo form_close();
     ?>
-
+    </div>
     </div>
 </div>

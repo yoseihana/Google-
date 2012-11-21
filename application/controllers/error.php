@@ -57,4 +57,10 @@ class Error extends CI_Controller
         $dataLayout['vue'] = $this->load->view('error_membre_pseudo', $data, true);
         $this->load->view('layout', $dataLayout);
     }
+
+    public function error_404(){
+        $data['title'] = 'Erreur de page';
+        $dataLayout['vue'] = $this->load->view('error_page', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
 }

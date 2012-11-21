@@ -17,11 +17,11 @@
         <?php if(count($posts)): ?>
         <?php foreach($posts as $post): ?>
             <div class="post">
-                <p class="pseudo, icon-comment"><?php echo $post->pseudo; ?> </p>
+                <h2 class="pseudo icon-comment"><?php echo $post->pseudo; ?> </h2>
                 <p><?php echo $post->commentaire; ?></p>
                 <div class="infoSite">
                     <p class="site"><?php echo anchor($post->lien, $post->titre, array('title'=>$post->titre, 'alt'=>$post->titre)); ?></p>
-                    <p class="porpos"><?php echo $post->description; ?></p>
+                    <p class="propos"><?php echo $post->description; ?></p>
                     <p class="image"><?php echo anchor($post->lien, img($post->image), array('title'=>$post->titre, 'alt'=>$post->titre)); ?></p>
                 </div>
                 <?php if($membre->pseudo == $post->pseudo): ?>

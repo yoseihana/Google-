@@ -28,8 +28,10 @@ class Post extends CI_Controller {
         $data['title'] = "Ajouter un nouveau lien";
 
         foreach($data['posts'] as $post){
-            if(!(fopen($post->image, 'r'))){
-                $post->image = 'web/img/no-pre.png';
+            if(empty($post->image)){
+               // if(!(fopen($post->image, 'r'))){
+                    $post->image = 'web/img/no-pre.png';
+               // }
             }
         }
 
@@ -47,6 +49,12 @@ class Post extends CI_Controller {
         $this->load->helper('url');
 
         $lien = $this->input->post('lien');
+
+        if(strpbrk($lien, '.html')){
+            $newL = strrpos($lien, "/");
+            $url = substr($lien, 0, $newL);
+
+        }
 
         //Appel la fct via l'objet m_post
         $html = $this->file_get_contents_curl($lien);
@@ -81,7 +89,7 @@ class Post extends CI_Controller {
         $DomNodeList = $htmlDom->getElementsByTagName('img');
         foreach($DomNodeList as $node){
             $src = $node->getAttribute('src');
-            $src = $this->relAbs($lien, $src);
+            $src = $this->relAbs($url, $src);
 
             //Affichage de l'extention
             $info = new SplFileInfo($src);

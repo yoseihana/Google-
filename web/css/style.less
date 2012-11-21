@@ -68,7 +68,7 @@ blockquote, q {
 @gardientMoz: -moz-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
 @gardientWebk: -webkit-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
 @gardientMs: -ms-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@boxShadow: 3px 3px 9px #646370;
+@boxShadow: 3px 3px 9px rgba(0, 0, 0, .2);
 @borderRWebK: 6px;
 @borderRMoz: 6px;
 @borderR: 6px;
@@ -85,14 +85,14 @@ body{
     font-family: Helvetica, Arial, sans-serif;
 }
 
-#membre, .post, .postModifcation{
+#membre, .post, .postModifcation, .error{
     background-color: @contentColor;
     position: relative;
     border: @border;
     box-shadow:@boxShadow;
 }
 
-#membre, .postModifcation{
+#membre, .postModifcation, .error{
   width: 400px;
   margin: 0 auto;
   padding: 1em;
@@ -118,8 +118,12 @@ h2{
     float: left;
 }
 
+textarea{
+  color: @textColor;
+  width: 99%;
+}
+
 .post, .postSubmit{
-    //border: 1px solid gray;
     padding: 1em;
     margin: 1em;
 }
@@ -145,10 +149,52 @@ h3{
 
 p{
     margin: 0.5em 0 1em 0;
+  line-height: 1.25em;
 }
 /*  Formulaire de modification */
 label{
   color: @contentColor;
+}
+
+/* Formulaire d'ajout */
+.ajout{
+  float: none;
+}
+
+.ajout a{
+  color: @titleColor;
+}
+
+.ajout a:hover{
+  text-decoration: underline;
+}
+
+.formAjout{
+  width: 875px;
+}
+
+.images input{
+  float: left;
+  width: 30%;
+  margin-left: 3%;
+}
+
+input[type=radio]{
+  width: 25px;
+  margin-left: 30%;
+}
+
+.post form{
+  position: relative;
+}
+
+.inputImg{
+  float: left;
+  margin: 0 2em;
+}
+
+.boutton{
+  clear: both;
 }
 
 /* Log Off */
@@ -168,16 +214,28 @@ label{
 /*  Listing du post */
 .pseudo{
   color: @titleColor;
-  font-size: 1.5em;
+  font-size: 2em;
+  float: none;
+}
+
+.propos{
+  margin-right: 2em;
 }
 
 .modifier{
   height: 25px;
 }
 
-.modifier p a:hover{
+.modifier p a:hover, .error p a:hover{
   text-decoration: underline;
-  color: @titleColor;
+}
+
+.icon-cancel a:hover{
+  color: red;
+}
+
+.icon-pencil-alt a:hover{
+  color: green;
 }
 
 .modifier p{
@@ -197,6 +255,10 @@ img
   font-weight: bold;
 }
 
+.site a:hover{
+  text-decoration: underline;
+}
+
 .infoSite{
   border-top: 1px solid #E3D8D8;
   border-bottom: 1px solid #E3D8D8;
@@ -210,9 +272,9 @@ img
   background-image: @gardientMoz;
   background-image: @gardientWebk;
   background-image: @gardientMs;
-  padding: 0.5em;
-  borer: @border;
+  padding: 0.75em 0.5em;
   box-shadow:@boxShadow;
+  margin-bottom: 1em;
 }
 
 .lien input[type=text]{
@@ -224,6 +286,7 @@ img
   width: 225px;
   box-shadow:1px 1px 8px #545F6B;
   margin-right: 2em;
+  margin-top: -0.25em;
 }
 
 input{
@@ -243,7 +306,7 @@ input[type=submit], button{
   color: @textColorButton;
 }
 
-#membre input[type=submit], button, .postModifcation input[type=submit]{
+#membre input[type=submit], button, .postModifcation input[type=submit], .boutton input[type=submit]{
   -webkit-border-radius: @borderRWebK;
   -moz-border-radius: @borderRMoz;
   border-radius: @borderR;
@@ -257,4 +320,37 @@ input[type=submit]{
 
 button a{
   color: @textColorButton;
+}
+/*  Page d'erreur */
+.error h2{
+  float: none;
+}
+
+/*************** MEDIA 481px **************/
+
+@media only screen and (max-width: 481px){
+  body{
+    background-color: yellow;
+  }
+}
+/*************** MEDIA 482px - 768px **************/
+@media only screen and (min-width: 483px) and (max-width: 768px) {
+  body{
+    background-color: red;
+  }
+
+}
+
+/*************** MEDIA 945px - 770px **************/
+@media only screen and (min-width: 770px) and (max-width: 950px) {
+    body{
+      max-width: 825px;
+      min-width: 770px;
+      margin: 0 auto;
+      background-color: blue;
+    }
+
+  .lien input[type="text"]{
+    width: 500px;
+  }
 }

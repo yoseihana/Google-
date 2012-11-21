@@ -29,8 +29,11 @@
 
 .icon-mail:before { content: '\2709'; } /* '✉' */
 .icon-pencil-alt:before { content: '\2710'; } /* '✐' */
+.icon-pencil-alt:hover:before { color: green; }
 .icon-ok:before { content: '\2713'; } /* '✓' */
 .icon-cancel:before { content: '\2715'; } /* '✕' */
+.icon-cancel:hover:before { color: red; }
 .icon-comment:before { content: '\e718'; } /* '' */
+.icon-comment:before { margin: 0 1em 0 -2em; }
 .icon-user:before { content: '👤'; } /* '\1f464' */
 .icon-lock:before { content: '🔒'; } /* '\1f512' */
