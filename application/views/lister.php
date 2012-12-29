@@ -6,7 +6,7 @@
         <?php
         echo form_open('post/ajouter', array('method'=>'post', 'class'=>'lien'));
         echo '<div class="bouton">';
-        $lienInput = array('name'=>'lien', 'value'=>'Ton lien');
+        $lienInput = array('name'=>'lien', 'placeholder'=>'Ton lien');
         echo form_input($lienInput);
         echo form_submit('Partager', 'Partager ce lien');
         echo '</div>';

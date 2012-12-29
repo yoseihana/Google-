@@ -16,9 +16,9 @@ class M_Post extends CI_Model
 
     public function lister()
     {
-        $this->db->select ('posts.*, membre.*');
+        $this->db->select ('posts.*, membres.*');
         $this->db->from ('posts');
-        $this->db->join ('membre', 'posts.id_membre = membre.id_membre');
+        $this->db->join ('membres', 'posts.id_membre = membres.id_membre');
         $this->db->order_by('id_post','desc');
 
         $query = $this->db->get();
@@ -27,15 +27,17 @@ class M_Post extends CI_Model
 
     public function creer($data)
     {
-        $sql = 'INSERT INTO posts
-                (id_membre, commentaire, image, titre, description, lien) VALUES("'
-                .$data["id_membre"].'","'
-                .$data["commentaire"].'","'
-                .$data["image"].'","'
-                .$data["titre"].'","'
-                .$data["description"].'","'
-                .$data["lien"].'")';
-        $this->db->query($sql);
+        $query = $this->db->insert('posts',
+            array(
+                'id_membre' => $data['id_membre'] ,
+                'commentaire' => $data['commentaire'],
+                'image' => $data['image'],
+                'titre' => $data['titre'],
+                'description' => $data['description'],
+                'lien' => $data['lien']
+            ));
+
+        return $query;
     }
 
     public function delete($id)

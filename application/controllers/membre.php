@@ -20,11 +20,14 @@ class Membre extends CI_Controller {
     public function login()
     {
         $this->load->model('M_Membre');
+        $this->load->helper('security');
 
         //Récupère un arrêt de données
         $data['mdp'] = $this->input->post('mdp');
+        $data['mdp'] = do_hash($data['mdp'], 'md5'); // MD5
         $data['email'] = $this->input->post('email');
         $data['title'] = 'Se connecter à Partage ton lien';
+
 
         //Vérification si des données sont entrée
         if($this->M_Membre->verifier($data))
@@ -55,10 +58,11 @@ class Membre extends CI_Controller {
         $this->load->view('layout', $dataLayout);
     }
 
-    public function creer(){
+   public function creer(){
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('M_Membre');
+        $this->load->helper('security');
 
         $email = $this->input->post('email');
         $pseudo = $this->input->post('pseudo');
@@ -69,16 +73,19 @@ class Membre extends CI_Controller {
 
         }else{
             if($this->M_Membre->isPseudoExist($pseudo)){
+
                 redirect('error/error_membre_pseudo');
+
             }else{
                 //Reprise des données dans le formulaire
                 $data['pseudo'] = $this->input->post('pseudo');
                 $data['email'] = $this->input->post('email');
-                $data['mdp']=$this->input->post('mdp');
+                $data['mdp'] = $this->input->post('mdp');
+                $data['mdp'] = do_hash($data['mdp'], 'md5');
 
                 $this->M_Membre->creer($data);
 
-                echo 'Inscription ok';
+               redirect("success/success_membre");
             }
         }
     }

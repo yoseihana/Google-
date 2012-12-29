@@ -2,39 +2,10 @@
 	<h1><?php echo anchor(base_url('index.php/post/lister'), 'Bienvenue sur le site communautaire "Partage tes sites"!', array('title'=>'Accueil du site de partage')); ?></h1>
     <div class="post">
         <h2 class="ajout">Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title'=>'Aller sur le site '.$url, 'alt'=>'Aller sur le site '.$url)); ?></h2>
-        <!--<p><?php //echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
-        <p><?php //echo anchor(base_url('index.php/post/lister'), 'Retour à la page d\'acceuil', array('title'=>'Accueil du site de partage')); ?></p>
-        <?php //echo form_open('post/creer') ?>
-        <label for="comment">Commentaire</label></br>
-        <textarea cols="55" rows="10" id="comment" value="Commentaire" name="commentaire"></textarea></br>
-        <label for="lien">Lien à partager</label>
-        <input type="url" name="lien" size="55" value="<?php //echo $url ?>" id="lien" name="url" /></br>
-        <label for="title">Titre</label>
-        <input type="text" name="titre" id="title" size="70" value="<?php //echo $titre ?>"/></br>
-        <label for="describ">Description</label></br>
-        <textarea cols="55" rows="10" name="description" id="describ" value="<?php //echo $description ?>"/><?php //echo $description ?></textarea></br>
-        <?php //if(isset($images)): ?>
-        <?php //for($i=0; $i<count($images); ++$i):?>
-            <div class="images">
-                <input type="radio" name="image" value="<?php //echo $images[$i]; ?>" />
-                <p><?php //echo img($images[$i]); ?></p>
-            </div>
-        <?php //endfor; ?>
-        <?php //else: ?>
-             <div class="images">
-                <p><?php //echo img(base_url('web/img/no-pre.png')); ?></p>
-            </div>
-           <?php //endif; ?>
-
-        <input type="submit" name="envoyer" value="Ajouter le lien">
-
-        <input type="hidden" name="membre" value="<?php //echo $membre->id_membre; ?>"/>
-        </form>-->
-
     <?php
     echo form_open('post/creer', array('method'=>'post'));
     echo '<div class="bouton">';
-    $commentaireText = array('name'=>'commentaire', 'value'=> 'Ton commentaire', 'cols'=>'55', 'rows'=>'5', 'id'=>'commentaire');
+    $commentaireText = array('name'=>'commentaire', 'placeholder'=> 'Ton commentaire', 'cols'=>'55', 'rows'=>'5', 'id'=>'commentaire');
     echo form_textarea($commentaireText);
     echo '</div>';
     echo '<div class="bouton">';
@@ -54,14 +25,11 @@
                 <p><?php echo img($images[$i]); ?></p>
             </div>
             <?php endfor; ?>
-        <?php else: ?>
-        <div class="inputImg">
-            <p><?php echo img(base_url('web/img/no-pre.png')); ?></p>
-        </div>
     <?php endif; ?>
     </div>
         <div class="boutton">
     <?php echo form_hidden('membre', $membre->id_membre);
+        echo form_hidden('lien', $url);
         echo form_submit('Envoyer', 'Ajouter ce lien!');
         echo form_button('Retour', anchor('post/lister', 'Retour', array('title'=>'Retour sur a page d\'accueil', 'alt'=>'Retour sur a page d\'accueil')));
     echo form_close();

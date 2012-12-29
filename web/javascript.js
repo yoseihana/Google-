@@ -12,7 +12,7 @@ $(function(){
         $.ajax({
             url:href,
             success: function(data){
-                $this.parent().parent().parent().fadeOut(5000);
+                $this.parent().parent().parent().fadeOut(1500);
             }
         });
         event.preventDefault();

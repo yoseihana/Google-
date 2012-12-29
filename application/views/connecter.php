@@ -4,11 +4,11 @@
     <?php
     echo form_open('membre/login', array('method'=>'post'));
     echo '<div class="bouton">';
-    $emailInput = array('name'=>'email', 'id'=>'email','value'=>'Ton email', 'class'=>'icon-mail');
+    $emailInput = array('name'=>'email', 'id'=>'email','placeholder'=>'Votre email', 'class'=>'icon-mail');
     echo form_input($emailInput);
     echo '</div>';
     echo '<div class="bouton">';
-    $mdpInput = array('name'=>'mdp', 'id'=>'mdp', 'value'=>'Mot de passe', 'class'=>'icon-lock');
+    $mdpInput = array('name'=>'mdp', 'id'=>'mdp', 'class'=>'icon-lock', 'placeholder'=>'Votre mot de passe');
     echo form_password($mdpInput);
     echo '</div>';
     echo form_submit('check', 'Vérifier', 'icon-lock');

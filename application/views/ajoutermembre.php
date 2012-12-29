@@ -5,15 +5,15 @@
     <?php
     echo form_open('membre/creer', array('method'=>'post'));
     echo '<div class="bouton">';
-    $pseudoInput = array('name'=>'pseudo', 'id'=>'login', 'value'=>'Ton email');
+    $pseudoInput = array('name'=>'pseudo', 'id'=>'login', 'placeholder'=>'Ton pseudo');
     echo form_input($pseudoInput);
     echo '</div>';
     echo '<div class="bouton">';
-    $emailInput = array('name'=>'email', 'id'=>'email', 'value'=>'Ton pseudo');
+    $emailInput = array('name'=>'email', 'id'=>'email', 'placeholder'=>'Ton email');
     echo form_input($emailInput);
     echo '</div>';
     echo '<div class="bouton">';
-    $mdpInput = array('name'=>'mdp', 'id'=>'mdp','value'=>'Mot de passe');
+    $mdpInput = array('name'=>'mdp', 'id'=>'mdp','placeholder'=>'Ton mot de passe');
     echo form_password($mdpInput);
     echo '</div>';
     echo form_submit('check', 'M\'inscrire!');

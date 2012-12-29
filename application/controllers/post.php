@@ -1,22 +1,23 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Post extends CI_Controller {
+class Post extends CI_Controller
+{
 
-	public function __construct()
+    public function __construct()
     {
         parent::__construct();
 
-        if(!($this->session->userdata('logged_in')))
+        if (!($this->session->userdata('logged_in')))
         {
             redirect('membre');
         }
     }
 
     public function index()
-	{
+    {
         $this->lister();
 
-	}
+    }
 
     public function lister()
     {
@@ -24,14 +25,16 @@ class Post extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Post');
-        $data['posts']= $this->M_Post->lister();
+        $data['posts'] = $this->M_Post->lister();
         $data['title'] = "Ajouter un nouveau lien";
 
-        foreach($data['posts'] as $post){
-            if(empty($post->image)){
-               // if(!(fopen($post->image, 'r'))){
-                    $post->image = 'web/img/no-pre.png';
-               // }
+        foreach ($data['posts'] as $post)
+        {
+            if (empty($post->image))
+            {
+                // if(!(fopen($post->image, 'r'))){
+                $post->image = 'web/img/no-pre.png';
+                // }
             }
         }
 
@@ -50,7 +53,8 @@ class Post extends CI_Controller {
 
         $lien = $this->input->post('lien');
 
-        if(strpbrk($lien, '.html')){
+        if (strpbrk($lien, '.html'))
+        {
             $newL = strrpos($lien, "/");
             $url = substr($lien, 0, $newL);
 
@@ -66,43 +70,82 @@ class Post extends CI_Controller {
         //intégartion du title
         $DomNodeList = $htmlDom->getElementsByTagName('title');
         $data['titre'] = $DomNodeList->item(0)->nodeValue;
-        $data['title'] = 'Ajout d\'un lien '.$data['titre'];
+        $data['title'] = 'Ajout d\'un lien ' . $data['titre'];
+
 
         //Intégration du meta description
         $DomNodeList = $htmlDom->getElementsByTagName('meta');
 
         // Boucle sur les resultats du tag meta
-        foreach($DomNodeList as $node){
-            if(strtolower($node->getAttribute('name'))=='description'){
+        /*for ($i = 0; $i < $DomNodeList->length; $i++)
+        {
+            $meta = $DomNodeList->item($i);
+            if($DomNodeList->getAttribute('name') == 'description')
+                $description = $meta->getAttribute('content');
+            if($DomNodeList->getAttribute('name') == 'keywords')
+                $keywords = $meta->getAttribute('content');
+        }*/
+
+        //$data['description'] = $description;
+       foreach ($DomNodeList as $node)
+        {
+
+            if (strtolower($node->getAttribute('name')) == 'description')
+            {
+
+                // var_dump(strtolower(($node->getAttribute('name'))));
                 $content = $node->getAttribute('content');
-                if(isset($content)){
-                    $data['description'] = $node->getAttribute('content');
-                }else{
-                   $data['description'] = 'Il n\'y a pas de déscription pour ce site';
+
+                if (isset($content))
+                {
+
+                    $data['description'] = $content;
+
+                } else
+                {
+                    $data['description'] = 'Il n\'y a pas de description';
                 }
-            }else{
-                $data['description'] = 'Il n\'y a pas de déscription pour ce site';
+            } else
+            {
+
+                $data['description'] = 'Il n\'y a pas de  pour ce site';
             }
         }
 
         //Intégration image
         $DomNodeList = $htmlDom->getElementsByTagName('img');
-        foreach($DomNodeList as $node){
+
+        foreach ($DomNodeList as $node)
+        {
             $src = $node->getAttribute('src');
             $src = $this->relAbs($url, $src);
+            $header = get_headers($src);
 
-            //Affichage de l'extention
-            $info = new SplFileInfo($src);
+            if (stripos($header[0], '404 Not Found') == false)
+            {
 
-            //Affiche les images de format spécifique et affiche uniquement entre 100px et 800px
-                  if($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif'){
-                      //Ne prendra pas en compte les images sans extentions
-                      $size = getimagesize($src);
-                      if($size[0] >= '150' && $size[0] <= '800'){
-                          $data['images'][] = $src;
-                      }
-                  }
-             }
+                //Affichage de l'extention
+                $info = new SplFileInfo($src);
+
+                //Affiche les images de format spécifique et affiche uniquement entre 100px et 800px
+                if ($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif')
+                {
+
+
+                    $size = getimagesize($src);
+
+                    if ($size[0] >= '150' && $size[0] <= '800')
+                    {
+
+                        $data['images'][] = $src;
+                    }
+                }
+            } else
+            {
+
+                $data['image'][] = 'web/img/no-pre.png';
+            }
+        }
 
         $data['id_membre'] = $this->input->post('id_membre');
         $data['url'] = $lien;
@@ -121,25 +164,30 @@ class Post extends CI_Controller {
         $this->load->library('upload');
         $this->load->library('image_lib');
 
-        $posts= $this->M_Post->lister();
-        $nbPosts = count($posts);
+        $posts = $this->M_Post->lister();
+        // $nbPosts = count($posts);
 
         //Reprise des données dans le formulaire
-        $data['lien'] = $this->input->post('lien');
         $data['commentaire'] = $this->input->post('commentaire');
-        $data['titre']=$this->input->post('titre');
-        $data['description']=$this->input->post('description');
-        $data['image']=$this->input->post('image');
-        $data['id_membre']=$this->input->post('membre');
-        $data['url'] = $this->input->post('url');
+        $data['titre'] = $this->input->post('titre');
+        $data['description'] = $this->input->post('description');
 
-        $content = file_get_contents($data['image']);
+        $data['image'] = $this->input->post('image');
+        $data['id_membre'] = $this->input->post('membre');
+        $data['lien'] = $this->input->post('url');
+
+        /*$content = file_get_contents($data['image']);
+        // Écrit le résultat dans le fichier
+        $file = "./web/uploads/mini.png";
+        file_put_contents($file, $content);
+
         $titreImage = strtolower(str_replace(' ', '', $data['titre']));
+
         for($image = 0; $image<$nbPosts; ++$image){
 
             file_put_contents('./web/uploads/'.$titreImage.$image.'.jpg', $content);
             $image++;
-        }
+        }*/
 
         //TODO resize Image (pas en CSS)
 
@@ -153,7 +201,7 @@ class Post extends CI_Controller {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_HEADER, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );    # required for https urls
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); # required for https urls
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 
@@ -161,7 +209,8 @@ class Post extends CI_Controller {
         curl_close($ch);
 
         //Gestion de l'erreur si l'URL donnée n'est pas bonne
-        if(!preg_match('#HTTP/1.1.200#', $data)){
+        if (!preg_match('#HTTP/1.1.200#', $data))
+        {
             redirect('error/error_lien');
         }
 
@@ -175,10 +224,12 @@ class Post extends CI_Controller {
         $this->M_Post->delete($it);
 
         //Si l'appel de cette fct a été faite avec ajax ou pas
-        if($this->input->is_ajax_request()){
+        if ($this->input->is_ajax_request())
+        {
             echo 'Lien supprimé';
-        }else{
-             redirect('error/error_ajax');
+        } else
+        {
+            redirect('error/error_ajax');
         }
     }
 
@@ -195,7 +246,7 @@ class Post extends CI_Controller {
         $post = $this->M_Post->voir($id);
 
         $data['titre'] = $post->titre;
-        $data['title'] = 'Modifier le post: '.$data['titre'];
+        $data['title'] = 'Modifier le post: ' . $data['titre'];
         $data['commentaire'] = $post->commentaire;
         $data['description'] = $post->description;
         $data['id_post'] = $post->id_post;
@@ -220,29 +271,35 @@ class Post extends CI_Controller {
     }
 
     //Correction des liens relatifs en absolus
-    function relAbs ($url, $lien)
+    function relAbs($url, $lien)
     {
-        if ($lien){
-            if (strstr($lien, 'http://') !== false || strstr($lien, 'https://') !== false){
+        if ($lien)
+        {
+            if (strstr($lien, 'http://') !== false || strstr($lien, 'https://') !== false)
+            {
                 return $lien;
             }
-        }else{
+        } else
+        {
             return null;
         }
 
-        if (!$url){
+        if (!$url)
+        {
             return null;
         }
 
-        if ($url[strlen($url)-1] !== '/'){
+        if ($url[strlen($url) - 1] !== '/')
+        {
             $url .= '/';
         }
 
-        if ($lien[0] == '/'){
+        if ($lien[0] == '/')
+        {
             $lien = substr($lien, 1);
         }
 
-        return $url.$lien;
+        return $url . $lien;
     }
 }
 /* Location: ./application/controllers/post.php */

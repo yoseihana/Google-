@@ -11,7 +11,7 @@ class M_Membre extends CI_Model
 {
     public function verifier($data)
     {
-        $query = $this->db->get_where('membre',
+        $query = $this->db->get_where('membres',
             array(
                 'email'=>$data['email'],
                  'mdp'=>$data['mdp']
@@ -23,7 +23,7 @@ class M_Membre extends CI_Model
     public function getMembre($email)
     {
         $this->db->select('*');
-        $this->db->from('membre');
+        $this->db->from('membres');
         $this->db->where('email', $email);
 
         $query = $this->db->get();
@@ -32,7 +32,7 @@ class M_Membre extends CI_Model
 
     public function isMailExist($email){
         $this->db->select('email');
-        $this->db->from('membre');
+        $this->db->from('membres');
         $this->db->where('email',$email);
 
         $query = $this->db->get();
@@ -42,7 +42,7 @@ class M_Membre extends CI_Model
 
     public function isPseudoExist($pseudo){
         $this->db->select('pseudo');
-        $this->db->from('membre');
+        $this->db->from('membres');
         $this->db->where('pseudo',$pseudo);
 
         $query = $this->db->get();
@@ -52,14 +52,13 @@ class M_Membre extends CI_Model
 
     public function creer($data){
 
-        $this->db->insert('membre',
+       $query = $this->db->insert('membres',
             array(
             'pseudo' => $data['pseudo'] ,
             'email' => $data['email'],
             'mdp' => $data['mdp']
         ));
 
-        $query = $this->db->get();
-        return $query->row();
+        return $query;
     }
 }
