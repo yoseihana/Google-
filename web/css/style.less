@@ -1,3 +1,57 @@
+/* Import GRID */
+@import 'grid.less';
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+@total-width: 100%;
+
+/*  FONT */
+@font-face {
+  font-family: 'nexa_lightregular';
+  src: url('../font/Nexa_Free_Light-webfont.eot');
+  src: url('../font/Nexa_Free_Light-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../font/Nexa_Free_Light-webfont.woff') format('woff'),
+  url('../font/Nexa_Free_Light-webfont.ttf') format('truetype'),
+  url('../font/Nexa_Free_Light-webfont.svg#nexa_lightregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'nexa_boldregular';
+  src: url('../font/exa_Free_Bold-webfont.eot');
+  src: url('../font/Nexa_Free_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../font/Nexa_Free_Bold-webfont.woff') format('woff'),
+  url('../font/Nexa_Free_Bold-webfont.ttf') format('truetype'),
+  url('../font/Nexa_Free_Bold-webfont.svg#nexa_boldregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@nexaLight: nexa_lightregular,Arial, sans-serif;
+@nexaBold: nexa_boldregular, Arial, sans-serif;
+
+/* DESIGN */
+@bodyColor: #D9D9D9;
+@contentColor: #FFFFFF;
+@titleColor: #5F9AB9;
+@textColorButton: #F8F9FA;
+@textColor: #7D7C7C;
+
+@border: 1px solid #F8F9FA;
+
+@gardient: linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientLinear: -o-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientMoz: -moz-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientWebk: -webkit-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+@gardientMs: -ms-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+
+@boxShadow: 3px 3px 9px rgba(0, 0, 0, .2);
+@borderRWebK: 6px;
+@borderRMoz: 6px;
+@borderR: 6px;
+
+
 /************************************************
 /* RESTE MEYER
 ************************************************/
@@ -58,48 +112,39 @@ blockquote, q {
 /************************************************
 /* FIN RESTE MEYER
 ************************************************/
-@bodyColor: #D9D9D9;
-@contentColor: #FFFFFF;
-@titleColor: #5F9AB9;
-@border: 1px solid #F8F9FA;
-@textColor: #7D7C7C;
-@gardient: linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientLinear: -o-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientMoz: -moz-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientWebk: -webkit-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientMs: -ms-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@boxShadow: 3px 3px 9px rgba(0, 0, 0, .2);
-@borderRWebK: 6px;
-@borderRMoz: 6px;
-@borderR: 6px;
-@textColorButton: #F8F9FA;
-
 
 body{
     background-color: @bodyColor;
-    margin: 1em auto;
     font-size: 16px;
-    width: 950px;
     color: @textColor;
     font-size: 14px;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: @nexaLight;
 }
 
-#membre, .post, .postModifcation, .error{
+.container{
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.content{
+  .column(12);
+}
+
+.membre, article, .sectionContent, .error{
     background-color: @contentColor;
-    position: relative;
     border: @border;
     box-shadow:@boxShadow;
 }
 
-#membre, .postModifcation, .error{
-  width: 400px;
-  margin: 0 auto;
+.membre, .postModifcation, .error{
+  .column(6);
+  .push(3);
   padding: 1em;
 }
 
 h1{
     color: @titleColor;
+    font-family: @nexaBold;
     font-size: 2em;
     padding: 0.5em;
     text-align: center;
@@ -113,9 +158,7 @@ h1 a{
 
 h2{
     color: @titleColor;
-    font-weight: bold;
-    margin: 0.5em 0;
-    float: left;
+    font-family: @nexaBold;
 }
 
 textarea{
@@ -123,23 +166,18 @@ textarea{
   width: 99%;
 }
 
-.post, .postSubmit{
+article, .ajout, .postSubmit, .sectionContent{
     padding: 1em;
-    margin: 1em;
+    margin: 1em 0;
 }
 
-.form{
-  margin: 1em 0;
-  padding: 1em;
+section{
+  .column(12);
 }
 
 a{
   text-decoration: none;
   color: @textColor;
-}
-
-.post{
-    position: relative;
 }
 
 h3{
@@ -151,59 +189,26 @@ p{
     margin: 0.5em 0 1em 0;
   line-height: 1.25em;
 }
-/*  Formulaire de modification */
-label{
-  color: @contentColor;
+
+.sectionContent{
+  padding-bottom: 4em;
 }
 
-/* Formulaire d'ajout */
-.ajout{
-  float: none;
+/* Header et Log Off */
+header h2{
+  .column(10);
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-.ajout a{
-  color: @titleColor;
-}
-
-.ajout a:hover{
-  text-decoration: underline;
-}
-
-.formAjout{
-  width: 875px;
-}
-
-.images input{
-  float: left;
-  width: 30%;
-  margin-left: 3%;
-}
-
-input[type=radio]{
-  width: 25px;
-  margin-left: 30%;
-}
-
-.post form{
-  position: relative;
-}
-
-.inputImg{
-  float: left;
-  margin: 0 2em;
-}
-
-.boutton{
-  clear: both;
-}
-
-/* Log Off */
 .logOff{
+  .column(2);
   text-align: right;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .logOff a{
-  font-weight: lighter;
   text-decoration: underline;
 }
 
@@ -212,6 +217,32 @@ input[type=radio]{
 }
 
 /*  Listing du post */
+.lien, .ajoutInput, .ajoutTextarea{
+  background-image: @gardient;
+  background-image: @gardientLinear;
+  background-image: @gardientMoz;
+  background-image: @gardientWebk;
+  background-image: @gardientMs;
+  box-shadow:@boxShadow;
+  margin-bottom: 1em;
+  padding: 1em 0.5em;
+  margin-top: 1em;
+}
+
+.lien{
+ height: 30px;
+}
+
+.lien input[type=text]{
+  .column(8);
+}
+
+.lien input[type=submit]{
+  border: @border;
+  box-shadow:1px 1px 8px #545F6B;
+  height: 26px;
+  .column(3.5);
+}
 .pseudo{
   color: @titleColor;
   font-size: 2em;
@@ -228,6 +259,7 @@ input[type=radio]{
 
 .modifier p a:hover, .error p a:hover{
   text-decoration: underline;
+  color: @titleColor;
 }
 
 .icon-cancel a:hover{
@@ -252,7 +284,7 @@ img
 .site a{
   text-decoration: none;
   color: @titleColor;
-  font-weight: bold;
+  font-family: @nexaBold;
 }
 
 .site a:hover{
@@ -262,37 +294,57 @@ img
 .infoSite{
   border-top: 1px solid #E3D8D8;
   border-bottom: 1px solid #E3D8D8;
-  padding: 16px O;
+  padding: 16px 0px;
 }
 
-/* Connexion membre et ajouter membre*/
-.bouton{
-  background-image: @gardient;
-  background-image: @gardientLinear;
-  background-image: @gardientMoz;
-  background-image: @gardientWebk;
-  background-image: @gardientMs;
-  padding: 0.75em 0.5em;
-  box-shadow:@boxShadow;
+/*  Formulaire de modification */
+label{
+  color: @contentColor;
+}
+
+/* Formulaire d'ajout */
+
+.formAjout{
+  width: 870px;
+}
+
+.images input{
+  float: left;
+  width: 30%;
+  margin-left: 3%;
+}
+
+input[type=radio]{
+  width: 25px;
+  margin-left: 30%;
+}
+
+.inputImg{
+  float: left;
+  margin: 0.5em 2em;
+}
+
+.boutton{
+  clear: both;
+}
+
+.boutton input[type=submit], .boutton a, .boutton input[type=button]{
+  .column(4);
   margin-bottom: 1em;
 }
 
-.lien input[type=text]{
-  width: 600px;
+.boutton input[type="submit"]{
+  .push(4);
 }
 
-.lien input[type=submit]{
-  border: @border;
-  width: 225px;
-  box-shadow:1px 1px 8px #545F6B;
-  margin-right: 2em;
-  margin-top: -0.25em;
-}
-
+/* Formulaire de connexion et ajout membre */
 input{
-    width: 375px;
     height: 21px;
     color: @textColor;
+}
+
+.formConnexion .ajoutInput input{
+  width: 430px;
 }
 
 input[type=submit], button{
@@ -306,16 +358,12 @@ input[type=submit], button{
   color: @textColorButton;
 }
 
-#membre input[type=submit], button, .postModifcation input[type=submit], .boutton input[type=submit]{
+.membre input[type=submit], button, .postModifcation input[type=submit], .boutton input[type=submit]{
   -webkit-border-radius: @borderRWebK;
   -moz-border-radius: @borderRMoz;
   border-radius: @borderR;
   margin-top: 1em;
   box-shadow: @boxShadow;
-}
-
-input[type=submit]{
-  float: right;
 }
 
 button a{
@@ -324,6 +372,7 @@ button a{
 /*  Page d'erreur */
 .error h2{
   float: none;
+  margin: 0;
 }
 
 /*************** MEDIA 481px **************/

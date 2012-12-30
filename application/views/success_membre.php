@@ -1,8 +1,11 @@
-<div class="container">
-    <h1>Bienvenue sur le site communautaire "Partage tes sites"!</h1>
-    <div class="error">
+<header>
+    <h1>Nouvel identifiant sur le site communautaire "Partage tes sites"!</h1>
+</header>
+<section class="error">
+    <header>
         <h2>Inscription réussie!</h2>
-        <p>Votre inscription a été bien enregistée. Vous pouvez vous connecter avec votre login et votre mot de passe</p>
-        <p><?php echo anchor(base_url(), 'Retour sur la page de connexion'); ?></p>
-    </div>
-</div>
+    </header>
+    <p>Ton inscription a été bien enregistée. Tu peux te connecter avec ton login et ton mot de passe</p>
+
+    <p><?php echo anchor(base_url(), 'Retour sur la page de connexion'); ?></p>
+</section>

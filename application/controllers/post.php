@@ -128,7 +128,7 @@ class Post extends CI_Controller
                 $info = new SplFileInfo($src);
 
                 //Affiche les images de format spécifique et affiche uniquement entre 100px et 800px
-                if ($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif')
+                if ($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif' || $info->getExtension() == 'JPG' )
                 {
 
 
