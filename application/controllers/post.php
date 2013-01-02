@@ -25,21 +25,32 @@ class Post extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Post');
-        $data['posts'] = $this->M_Post->lister();
         $data['title'] = "Ajouter un nouveau lien";
+
+        $this->load->library('pagination');
+
+        $config = array();
+        $config['base_url'] = 'http://sharelink.buffart.eu/index.php/post/lister/';
+        $config['total_rows'] = $this->M_Post->countPost();
+        $config['per_page'] = 2;
+        $config['num_links'] = 10;
+        $config["uri_segment"] = 3;
+
+        $this->pagination->initialize($config);
+        $data['posts'] = $this->M_Post->lister($config['per_page'], $this->uri->segment($config["uri_segment"]));
+        $data['links'] = $this->pagination->create_links();
 
         foreach ($data['posts'] as $post)
         {
             if (empty($post->image))
             {
-                // if(!(fopen($post->image, 'r'))){
                 $post->image = 'web/img/no-pre.png';
-                // }
             }
         }
 
         $dataLayout['vue'] = $this->load->view('lister', $data, true);
         $this->load->view('layout', $dataLayout);
+
     }
 
     public function ajouter()
@@ -52,6 +63,11 @@ class Post extends CI_Controller
         $this->load->helper('url');
 
         $lien = $this->input->post('lien');
+
+        //Vérifie si le lien existe déjà
+        if($this->M_Post->isPostExist($lien)){
+            redirect('error/error_post_exist');
+        }
 
         if (strpbrk($lien, '.html'))
         {
@@ -76,41 +92,28 @@ class Post extends CI_Controller
         //Intégration du meta description
         $DomNodeList = $htmlDom->getElementsByTagName('meta');
 
-        // Boucle sur les resultats du tag meta
-        /*for ($i = 0; $i < $DomNodeList->length; $i++)
-        {
-            $meta = $DomNodeList->item($i);
-            if($DomNodeList->getAttribute('name') == 'description')
-                $description = $meta->getAttribute('content');
-            if($DomNodeList->getAttribute('name') == 'keywords')
-                $keywords = $meta->getAttribute('content');
-        }*/
 
-        //$data['description'] = $description;
-       foreach ($DomNodeList as $node)
-        {
 
+        //Boucle sur les ittérations de <meta>
+        $descriptionNode = null;
+        foreach ($DomNodeList as $node)
+        {
             if (strtolower($node->getAttribute('name')) == 'description')
             {
-
-                // var_dump(strtolower(($node->getAttribute('name'))));
-                $content = $node->getAttribute('content');
-
-                if (isset($content))
-                {
-
-                    $data['description'] = $content;
-
-                } else
-                {
-                    $data['description'] = 'Il n\'y a pas de description';
-                }
-            } else
-            {
-
-                $data['description'] = 'Il n\'y a pas de  pour ce site';
+                $descriptionNode = $node;
+                break;
             }
         }
+
+        //Assigniation de la description si $descriptionNode trouvé
+        if (is_null($descriptionNode))
+        {
+            $data['description'] = 'Il n\' a pas de description pour ce site';
+        } else
+        {
+            $data['description'] = $descriptionNode->getAttribute('content');
+        }
+
 
         //Intégration image
         $DomNodeList = $htmlDom->getElementsByTagName('img');
@@ -128,15 +131,12 @@ class Post extends CI_Controller
                 $info = new SplFileInfo($src);
 
                 //Affiche les images de format spécifique et affiche uniquement entre 100px et 800px
-                if ($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif' || $info->getExtension() == 'JPG' )
+                if ($info->getExtension() == 'jpg' || $info->getExtension() == 'JPEG' || $info->getExtension() == 'png' || $info->getExtension() == 'gif' || $info->getExtension() == 'JPG')
                 {
-
-
                     $size = getimagesize($src);
 
                     if ($size[0] >= '150' && $size[0] <= '800')
                     {
-
                         $data['images'][] = $src;
                     }
                 }
@@ -164,9 +164,6 @@ class Post extends CI_Controller
         $this->load->library('upload');
         $this->load->library('image_lib');
 
-        $posts = $this->M_Post->lister();
-        // $nbPosts = count($posts);
-
         //Reprise des données dans le formulaire
         $data['commentaire'] = $this->input->post('commentaire');
         $data['titre'] = $this->input->post('titre');
@@ -174,22 +171,7 @@ class Post extends CI_Controller
 
         $data['image'] = $this->input->post('image');
         $data['id_membre'] = $this->input->post('membre');
-        $data['lien'] = $this->input->post('url');
-
-        /*$content = file_get_contents($data['image']);
-        // Écrit le résultat dans le fichier
-        $file = "./web/uploads/mini.png";
-        file_put_contents($file, $content);
-
-        $titreImage = strtolower(str_replace(' ', '', $data['titre']));
-
-        for($image = 0; $image<$nbPosts; ++$image){
-
-            file_put_contents('./web/uploads/'.$titreImage.$image.'.jpg', $content);
-            $image++;
-        }*/
-
-        //TODO resize Image (pas en CSS)
+        $data['lien'] = $this->input->post('lien');
 
         $this->M_Post->creer($data);
         redirect('post/lister');
@@ -271,7 +253,7 @@ class Post extends CI_Controller
     }
 
     //Correction des liens relatifs en absolus
-    function relAbs($url, $lien)
+    private function relAbs($url, $lien)
     {
         if ($lien)
         {

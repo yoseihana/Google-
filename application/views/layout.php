@@ -17,6 +17,9 @@
 <div class="container">
     <?php echo $vue; ?>
 </div>
+<footer>
+    <p>"Partages tes sites" réalisé par Annabelle Buffart - INPRES Janvier 2012</p>
+</footer>
 </body>
 
 </html>

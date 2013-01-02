@@ -60,7 +60,13 @@ class Error extends CI_Controller
 
     public function error_404(){
         $data['title'] = 'Erreur de page';
-        $dataLayout['vue'] = $this->load->view('error_page', $data, true);
+        $dataLayout['vue'] = $this->load->view('error_404', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_post_exist(){
+        $data['title'] = 'Erreur de poste';
+        $dataLayout['vue'] = $this->load->view('error_post_exist', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 }

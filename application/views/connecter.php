@@ -1,14 +1,15 @@
 <header>
-    <h1>Connexion des membres du site "Partage ton site!"</h1>
+    <h1>Connexion des membres du site "Partages tes sites!"</h1>
 </header>
 <section>
     <div class="membre">
-        <p>Bienvenu sur "Partage ton site", site communautaire de partage de site. Pour acceder au réseau, merci de te connectez avec votre login et votre mot de passe.</p>
+        <p>Bienvenu sur "Partages tes sites", site communautaire de partage de sites. Pour acceder au réseau, merci de te connectez avec votre login et votre mot de passe.</p>
         <?php
         echo form_open('membre/login', array('method' => 'post', 'class' => 'formConnexion'));
         echo '<div class="ajoutInput">';
         $emailInput = array('name' => 'email', 'id' => 'email', 'placeholder' => 'Votre email', 'class' => 'icon-mail');
         echo form_input($emailInput);
+        //$data['error_email'];
         echo '</div>';
         echo '<div class="ajoutInput">';
         $mdpInput = array('name' => 'mdp', 'id' => 'mdp', 'class' => 'icon-lock', 'placeholder' => 'Votre mot de passe');

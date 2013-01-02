@@ -14,15 +14,18 @@ class M_Post extends CI_Model
         $this->load->database();
     }
 
-    public function lister()
+    public function lister($limit, $start)
     {
         $this->db->select ('posts.*, membres.*');
         $this->db->from ('posts');
         $this->db->join ('membres', 'posts.id_membre = membres.id_membre');
         $this->db->order_by('id_post','desc');
+        $this->db->limit($limit, $start);
 
         $query = $this->db->get();
+
         return $query->result();
+
     }
 
     public function creer($data)
@@ -58,5 +61,21 @@ class M_Post extends CI_Model
 
         $query = $this->db->get();
         return $query->row();
+    }
+
+    public function countPost(){
+
+        return $this->db->get("posts")->num_rows();
+
+    }
+
+    public function isPostExist($url){
+        $this->db->select('lien');
+        $this->db->from('posts');
+        $this->db->where('lien',$url);
+
+        $query = $this->db->get();
+
+        return $query->num_rows();
     }
 }

@@ -1,6 +1,6 @@
 <div class="content">
     <header>
-        <h1>Bienvenue sur le site communautaire "Partage tes sites"!</h1>
+        <h1>Bienvenue sur le site communautaire "Partages tes sites"!</h1>
 
         <h2>Hello <?php echo $membre->pseudo; ?>, que veux-tu partager?</h2>
 
@@ -40,5 +40,8 @@
             </article>
             <?php endforeach; ?>
         <?php endif; ?>
+        <footer>
+            <p><?php echo $links ?></p>
+        </footer>
     </section>
 </div>

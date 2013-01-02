@@ -1,6 +1,6 @@
 <div class="content">
     <header>
-        <h1><?php echo anchor(base_url('index.php/post/lister'), 'Partager un site sur "Partage tes sites"!', array('title' => 'Accueil du site de partage')); ?></h1>
+        <h1><?php echo anchor(base_url('index.php/post/lister'), 'Partager un site sur "Partages tes sites"!', array('title' => 'Accueil du site de partages')); ?></h1>
 
         <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title' => 'Aller sur le site ' . $url, 'alt' => 'Aller sur le site ' . $url)); ?></h2>
 
@@ -37,7 +37,7 @@
             <div class="boutton">
                 <?php echo form_hidden('membre', $membre->id_membre);
                 echo form_hidden('lien', $url);
-                echo anchor('post/lister', form_button('Retour', 'Retour'), array('title' => 'Retour sur a page d\'accueil', 'alt' => 'Retour sur a page d\'accueil'));
+                echo anchor('post/lister', form_button('Retour', 'Retour'), array('title' => 'Retour sur a page d\'accueil'));
                 echo form_submit('Envoyer', 'Ajouter ce lien!');
                 echo form_close();
                 ?>

@@ -7,7 +7,8 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Membre extends CI_Controller {
+class Membre extends CI_Controller
+{
 
     public function index()
     {
@@ -24,19 +25,19 @@ class Membre extends CI_Controller {
 
         //Récupère un arrêt de données
         $data['mdp'] = $this->input->post('mdp');
-        $data['mdp'] = do_hash($data['mdp'], 'md5'); // MD5
+        $data['mdp'] = do_hash($data['mdp'], 'md5');
         $data['email'] = $this->input->post('email');
         $data['title'] = 'Se connecter à Partage ton lien';
 
-
         //Vérification si des données sont entrée
-        if($this->M_Membre->verifier($data))
+        if ($this->M_Membre->verifier($data))
         {
+
             $info = $this->M_Membre->getMembre($data['email']);
             $this->session->set_userdata('logged_in', $info);
             redirect('post/lister');
-        }
-        else{
+        } else
+        {
             redirect('error/error_utilisateur');
         }
     }
@@ -47,7 +48,8 @@ class Membre extends CI_Controller {
         redirect('membre');
     }
 
-    public function ajoutermembre(){
+    public function ajoutermembre()
+    {
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Membre');
@@ -58,35 +60,105 @@ class Membre extends CI_Controller {
         $this->load->view('layout', $dataLayout);
     }
 
-   public function creer(){
+    public function creer()
+    {
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->model('M_Membre');
         $this->load->helper('security');
+        $this->load->library('email');
 
         $email = $this->input->post('email');
         $pseudo = $this->input->post('pseudo');
+        $mdp = $this->input->post('mdp');
 
-        if($this->M_Membre->isMailExist($email)){
+        $this->email->from('anna.buffart@gmail.com', 'Partages tes liens');
+        $this->email->to($email);
+        $this->email->cc('anna.buffart@gmail.com');
 
-            redirect('error/error_membre_mail');
+        $this->email->subject('Inscription sur le site "Partages tes sites"');
+        $this->email->message('Bonjour,
+        Nous prenons compte de ton inscription sur le site www.sharelink.buffart.eu.
 
-        }else{
-            if($this->M_Membre->isPseudoExist($pseudo)){
+        Tu peux dés lors te connecter sur le site via ton email et mot de passe. Bon partages!
 
-                redirect('error/error_membre_pseudo');
+        Cordialement,
 
-            }else{
-                //Reprise des données dans le formulaire
-                $data['pseudo'] = $this->input->post('pseudo');
-                $data['email'] = $this->input->post('email');
-                $data['mdp'] = $this->input->post('mdp');
-                $data['mdp'] = do_hash($data['mdp'], 'md5');
+        L\'équipe de Partages tes liens');
 
-                $this->M_Membre->creer($data);
+        $isNewMembre = $this->checkNew($pseudo, $email, $mdp);
 
-               redirect("success/success_membre");
-            }
+        if ($isNewMembre)
+        {
+
+            //Reprise des données dans le formulaire
+            $data['pseudo'] = $this->input->post('pseudo');
+            $data['email'] = $this->input->post('email');
+            $data['mdp'] = $this->input->post('mdp');
+            $data['mdp'] = do_hash($data['mdp'], 'md5');
+
+            $this->M_Membre->creer($data);
+
+            $this->email->send();
+
+            echo $this->email->print_debugger();
+
+            redirect("success/success_membre");
         }
+    }
+
+
+    public function checkNew($pseudo, $email, $mdp)
+    {
+
+        $this->load->model('M_Membre');
+
+        // Renvoyer une erreur car au moins un des 3 champs n'est pas remplis
+        if (!trim($pseudo) OR !trim($email) OR !trim($mdp))
+        {
+            var_dump('Aucun caractère');
+            return false;
+        }
+
+        // Verifier le pseudo
+        if (preg_match('/^[a-zA-Z0-9_-]{2,}$/i', $pseudo))
+        {
+            if ($this->M_Membre->isPseudoExist($pseudo))
+            {
+                redirect('error/error_membre_pseudo');
+                return false;
+
+            }
+
+        } else
+        {
+            var_dump('Mauvais caractères dans le pseudo');
+            return false;
+        }
+
+        // Verifier l'email
+        if (preg_match('/^[a-zA-Z0-9_+.-]{2,}@[a-zA-Z0-9_.-]+\.[a-zA-Z0-9_.-]{2,}$/i', $email))
+        {
+            if ($this->M_Membre->isMailExist($email))
+            {
+                redirect('error/error_membre_mail');
+                return false;
+
+            }
+        } else
+        {
+            var_dump('Mauvais caractères');
+            return false;
+        }
+
+
+        // Verifier le mdp
+        if (!preg_match('/^(\S{4,12})$/', $mdp))
+        {
+            var_dump('Le mot de passe ne contient pas le nombre de caractières nécessaire. Minimum 4 et maximum 12');
+            return false;
+        }
+
+        return true;
     }
 }

@@ -1,5 +1,5 @@
 <header>
-    <h1>"Partage ton site!" le site communautaire de partage</h1>
+    <h1><?php echo anchor("membre/ajoutermembre/", '"Partages tes sites!" le site communautaire de partage', array('title' => 'Retour sur la page d\'inscription')); ?></h1>
 </header>
 
 <section>
@@ -9,6 +9,6 @@
         </header>
         <p>Une erreur est survenue lors de l'inscription, ce pseudo existe déjà.</p>
 
-        <p><?php echo anchor("membre/ajoutermembre/", 'Retour sur la page d\'inscription'); ?></p>
+        <p><?php echo anchor("membre/ajoutermembre/", 'Retour sur la page d\'inscription', array('title' => 'Retour sur la page d\'inscription')); ?></p>
     </div>
 </section>

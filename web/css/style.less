@@ -175,6 +175,23 @@ section{
   .column(12);
 }
 
+section footer p{
+  text-align: center;
+}
+
+section footer strong{
+  font-family: @nexaBold;
+}
+
+section footer a{
+  margin: 0.5em;
+}
+
+section footer a:hover{
+  color: @titleColor;
+  font-family: @nexaBold;
+}
+
 a{
   text-decoration: none;
   color: @textColor;
@@ -192,6 +209,19 @@ p{
 
 .sectionContent{
   padding-bottom: 4em;
+}
+
+body>footer{
+  clear: both;
+  background-color: @contentColor;
+  height: 25px;
+}
+
+body>footer p{
+  margin: 0 auto;
+  width: 960px;
+  text-align: center;
+  padding: 1em 0;
 }
 
 /* Header et Log Off */
@@ -262,11 +292,11 @@ header h2{
   color: @titleColor;
 }
 
-.icon-cancel a:hover{
+.modifier .icon-cancel a:hover{
   color: red;
 }
 
-.icon-pencil-alt a:hover{
+.modifier .icon-pencil-alt a:hover{
   color: green;
 }
 

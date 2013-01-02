@@ -1,5 +1,5 @@
 <header>
-    <h1>"Partage ton site!" le site communautaire de partage</h1>
+    <h1><?php echo anchor("post/ajouter/", '"Partages tes sites!" le site communautaire de partage', array('title' => 'Retour sur la page d\'accueil')); ?></h1>
 </header>
 <section>
     <div class="error">
@@ -9,6 +9,6 @@
 
         <p>La page demandée n'existe pas.</p>
 
-        <p><?php echo anchor("post/ajouter/", 'Retour sur a page d\'accueil'); ?></p>
+        <p><?php echo anchor("post/ajouter/", 'Retour sur la page d\'accueil', array('title' => 'Retour sur la page d\'accueil')); ?></p>
     </div>
 </section>
