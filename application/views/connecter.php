@@ -7,12 +7,12 @@
         <?php
         echo form_open('membre/login', array('method' => 'post', 'class' => 'formConnexion'));
         echo '<div class="ajoutInput">';
-        $emailInput = array('name' => 'email', 'id' => 'email', 'placeholder' => 'Votre email', 'class' => 'icon-mail');
+        $emailInput = array('name' => 'email', 'id' => 'email', 'placeholder' => 'Votre email');
         echo form_input($emailInput);
         //$data['error_email'];
         echo '</div>';
         echo '<div class="ajoutInput">';
-        $mdpInput = array('name' => 'mdp', 'id' => 'mdp', 'class' => 'icon-lock', 'placeholder' => 'Votre mot de passe');
+        $mdpInput = array('name' => 'mdp', 'id' => 'mdp', 'placeholder' => 'Votre mot de passe');
         echo form_password($mdpInput);
         echo '</div>';
         echo '<div class="boutton">';

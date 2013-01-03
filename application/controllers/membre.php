@@ -104,7 +104,11 @@ class Membre extends CI_Controller
             echo $this->email->print_debugger();
 
             redirect("success/success_membre");
-        }
+        }/*else{
+
+            $data['message'] = $message;
+            var_dump($data['message']);
+        }*/
     }
 
 
@@ -117,6 +121,8 @@ class Membre extends CI_Controller
         if (!trim($pseudo) OR !trim($email) OR !trim($mdp))
         {
             var_dump('Aucun caractère');
+            //$message = 'Veilles à bien compléter les champs';
+            //return $message;
             return false;
         }
 

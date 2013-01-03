@@ -65,15 +65,19 @@ class Post extends CI_Controller
         $lien = $this->input->post('lien');
 
         //Vérifie si le lien existe déjà
-        if($this->M_Post->isPostExist($lien)){
+        if($this->M_Post->isPostExist($lien))
+        {
             redirect('error/error_post_exist');
+            return false;
         }
 
+        //Recherche l'occurence .html dans $liens
         if (strpbrk($lien, '.html'))
         {
+            //Recherche la position dans $lien de "/"
             $newL = strrpos($lien, "/");
+            //Retourne la chaine $lien commencant à l'occurence 0 et à length = $newL
             $url = substr($lien, 0, $newL);
-
         }
 
         //Appel la fct via l'objet m_post
@@ -123,6 +127,8 @@ class Post extends CI_Controller
             $src = $node->getAttribute('src');
             $src = $this->relAbs($url, $src);
             $header = get_headers($src);
+            //print_r($header);
+            //TODO http_get
 
             if (stripos($header[0], '404 Not Found') == false)
             {

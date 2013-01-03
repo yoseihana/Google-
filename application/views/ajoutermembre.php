@@ -7,6 +7,7 @@
             et tu pourras partager ton avis sur les sites.</p>
         <?php
         echo form_open('membre/creer', array('method' => 'post', 'class' => 'formConnexion'));
+        if()
         echo '<div class="ajoutInput">';
         $pseudoInput = array('name' => 'pseudo', 'id' => 'pseudo', 'placeholder' => 'Ton pseudo');
         echo form_input($pseudoInput);

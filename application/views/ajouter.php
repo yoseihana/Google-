@@ -27,9 +27,9 @@
                 <?php if (isset($images)): ?>
                 <?php for ($i = 0; $i < count($images); ++$i): ?>
                     <div class="inputImg">
-                        <input type="radio" name="image" value="<?php echo $images[$i]; ?>" <?php echo set_radio('image', $images[$i]); ?>  />
+                        <input type="radio" id="<?php echo $i; ?>" name="image" value="<?php echo $images[$i]; ?>" <?php echo set_radio('image', $images[$i]); ?>  />
 
-                        <p><?php echo img($images[$i]); ?></p>
+                        <label for="<?php echo $i; ?>" ><?php echo img($images[$i]); ?></label>
                     </div>
                     <?php endfor; ?>
                 <?php endif; ?>

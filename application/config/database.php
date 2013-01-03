@@ -48,16 +48,17 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'mysql51-70.perso';
-//$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'buffartanna';
-//$db['default']['username'] = 'root';
-$db['default']['password'] = 'NI3WWwLc';
-//$db['default']['password'] = 'root';
-$db['default']['database'] = 'buffartanna';
-//$db['default']['database'] = 'google';
+//$db['default']['hostname'] = 'mysql51-70.perso';
+$db['default']['hostname'] = 'localhost';
+//$db['default']['username'] = 'buffartanna';
+$db['default']['username'] = 'root';
+//$db['default']['password'] = 'NI3WWwLc';
+$db['default']['password'] = 'root';
+//$db['default']['database'] = 'buffartanna';
+$db['default']['database'] = 'google';
 $db['default']['dbdriver'] = 'mysql';
-$db['default']['dbprefix'] = 'sharelink_';
+//$db['default']['dbprefix'] = 'sharelink_';
+$db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;

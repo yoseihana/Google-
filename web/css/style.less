@@ -40,11 +40,65 @@
 
 @border: 1px solid #F8F9FA;
 
-@gardient: linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientLinear: -o-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientMoz: -moz-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientWebk: -webkit-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
-@gardientMs: -ms-linear-gradient(bottom, rgb(45,109,138) 14%, rgb(79,144,176) 57%, rgb(101,168,199) 79%);
+//Gardient des boutons généraux
+@gardient: #2d6d8a; /* Old browsers */
+@gardientMozL: -moz-linear-gradient(top,  #2d6d8a 14%, #4f90b0 57%, #65a8c7 79%); /* FF3.6+ */
+@gardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(14%,#2d6d8a), color-stop(57%,#4f90b0), color-stop(79%,#65a8c7)); /* Chrome,Safari4+ */
+@gardientWebL: -webkit-linear-gradient(top,  #2d6d8a 14%,#4f90b0 50%,#65a8c7 79%); /* Chrome10+,Safari5.1+ */
+@gardientOL: -o-linear-gradient(top,  #2d6d8a 14%,#4f90b0 57%,#65a8c7 79%); /* Opera 11.10+ */
+@gardientMsL: -ms-linear-gradient(top,  #2d6d8a 14%,#4f90b0 57%,#65a8c7 79%); /* IE10+ */
+@gardientL: linear-gradient(to bottom,  #2d6d8a 14%,#4f90b0 57%,#65a8c7 79%); /* W3C */
+@gardientFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d6d8a', endColorstr='#65a8c7',GradientType=0 ); /* IE6-9 */
+
+//Gardient des boutons généraux hover
+@hoverGardient: #7db9e8; /* Old browsers */
+@hoverGardientMozL: -moz-linear-gradient(top, #65a8c7 14%, #4f90b0 57%, #2d6d8a 79%); /* FF3.6+ */
+@hoverGardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(14%,#65a8c7), color-stop(57%,#4f90b0), color-stop(79%,#2d6d8a)); /* Chrome,Safari4+ */
+@hoverGardientWebL: -webkit-linear-gradient(top, #65a8c7 14%,#4f90b0 57%,#2d6d8a 79%); /* Chrome10+,Safari5.1+ */
+@hoverGardientOL: -o-linear-gradient(top, #65a8c7 14%,#4f90b0 57%,#2d6d8a 79%); /* Opera 11.10+ */
+@hoverGardientMsL: -ms-linear-gradient(top, #65a8c7 14%,#4f90b0 57%,#2d6d8a 79%); /* IE10+ */
+@hoverGardientL: linear-gradient(to bottom, #65a8c7 14%,#4f90b0 57%,#2d6d8a 79%); /* W3C */
+@hoverFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#65a8c7', endColorstr='#2d6d8a',GradientType=0 ); /* IE6-9 */
+
+//Gardient du bouton de modification
+@updateGardient: #8fc800; /* Old browsers */
+@updateGardientMozL: -moz-linear-gradient(top, #8fc800 0%, #36af4c 100%); /* FF3.6+ */
+@updateGardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8fc800), color-stop(100%,#36af4c)); /* Chrome,Safari4+ */
+@updateGardientWebL: -webkit-linear-gradient(top, #8fc800 0%,#36af4c 100%); /* Chrome10+,Safari5.1+ */
+@updateGardientOL: -o-linear-gradient(top, #8fc800 0%,#36af4c 100%); /* Opera 11.10+ */
+@updateGardientMsL: -ms-linear-gradient(top, #8fc800 0%,#36af4c 100%); /* IE10+ */
+@updateGardientL: linear-gradient(to bottom, #8fc800 0%,#36af4c 100%); /* W3C */
+@updateFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8fc800', endColorstr='#36af4c',GradientType=0 ); /* IE6-9 */
+
+//Gardient du bouton de modification hover
+@hoverUpdateGardient: #36af4c; /* Old browsers */
+@hoverUpdateGardientMozL: -moz-linear-gradient(top, #36af4c 0%, #8fc800 100%); /* FF3.6+ */
+@hoverUpdateGardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#36af4c), color-stop(100%,#8fc800)); /* Chrome,Safari4+ */
+@hoverUpdateGardientWebL: -webkit-linear-gradient(top, #36af4c 0%,#8fc800 100%); /* Chrome10+,Safari5.1+ */
+@hoverUpdateGardientOL: -o-linear-gradient(top, #36af4c 0%,#8fc800 100%); /* Opera 11.10+ */
+@hoverUpdateGardientMsL: -ms-linear-gradient(top, #36af4c 0%,#8fc800 100%); /* IE10+ */
+@hoverUpdateGardientL: linear-gradient(to bottom, #36af4c 0%,#8fc800 100%); /* W3C */
+@hoverUpdateFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#36af4c', endColorstr='#8fc800',GradientType=0 ); /* IE6-9 */
+
+//Gardient du bouton de supression
+@deletGardient: #e50003; /* Old browsers */
+@deletGardientMozL: -moz-linear-gradient(top,  #e50003 0%, #aa0303 99%); /* FF3.6+ */
+@deletGardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e50003), color-stop(99%,#aa0303)); /* Chrome,Safari4+ */
+@deletGardientWebL: -webkit-linear-gradient(top,  #e50003 0%,#aa0303 99%); /* Chrome10+,Safari5.1+ */
+@deletGardientOL: -o-linear-gradient(top,  #e50003 0%,#aa0303 99%); /* Opera 11.10+ */
+@deletGardientMsL: -ms-linear-gradient(top,  #e50003 0%,#aa0303 99%); /* IE10+ */
+@deletGardientL: linear-gradient(to bottom,  #e50003 0%,#aa0303 99%); /* W3C */
+@deletFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e50003', endColorstr='#aa0303',GradientType=0 ); /* IE6-9 */
+
+//Gardient du bouton de supression hover
+@hoverDeletGardient: #aa0303; /* Old browsers */
+@hoverDeletGardientMozL: -moz-linear-gradient(top, #aa0303 0%, #e50003 100%); /* FF3.6+ */
+@hoverDeletGardientWeb: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aa0303), color-stop(100%,#e50003)); /* Chrome,Safari4+ */
+@hoverDeletGardientWebL: -webkit-linear-gradient(top, #aa0303 0%,#e50003 100%); /* Chrome10+,Safari5.1+ */
+@hoverDeletGardientOL: -o-linear-gradient(top, #aa0303 0%,#e50003 100%); /* Opera 11.10+ */
+@hoverDeletGardientMsL: -ms-linear-gradient(top, #aa0303 0%,#e50003 100%); /* IE10+ */
+@hoverDeletGardientL: linear-gradient(to bottom, #aa0303 0%,#e50003 100%); /* W3C */
+@hoverDeletFilter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aa0303', endColorstr='#e50003',GradientType=0 ); /* IE6-9 */
 
 @boxShadow: 3px 3px 9px rgba(0, 0, 0, .2);
 @borderRWebK: 6px;
@@ -112,6 +166,9 @@ blockquote, q {
 /************************************************
 /* FIN RESTE MEYER
 ************************************************/
+html, body{
+  height: 100%;
+}
 
 body{
     background-color: @bodyColor;
@@ -124,6 +181,7 @@ body{
 .container{
   max-width: 960px;
   margin: 0 auto;
+  height: 95%;
 }
 
 .content{
@@ -214,7 +272,7 @@ p{
 body>footer{
   clear: both;
   background-color: @contentColor;
-  height: 25px;
+  height: 5%;
 }
 
 body>footer p{
@@ -248,11 +306,14 @@ header h2{
 
 /*  Listing du post */
 .lien, .ajoutInput, .ajoutTextarea{
-  background-image: @gardient;
-  background-image: @gardientLinear;
-  background-image: @gardientMoz;
-  background-image: @gardientWebk;
-  background-image: @gardientMs;
+  background: @gardient;
+  background: @gardientMozL;
+  background: @gardientWeb;
+  background: @gardientWebL;
+  background: @gardientOL;
+  background: @gardientMsL;
+  background: @gardientL;
+  filter: @gardientFilter;
   box-shadow:@boxShadow;
   margin-bottom: 1em;
   padding: 1em 0.5em;
@@ -335,7 +396,7 @@ label{
 /* Formulaire d'ajout */
 
 .formAjout{
-  width: 870px;
+  width: 99%;
 }
 
 .images input{
@@ -374,17 +435,20 @@ input{
 }
 
 .formConnexion .ajoutInput input{
-  width: 430px;
+  width: 99%;
 }
 
 input[type=submit], button{
   width: 125px;
   height: 28px;
-  background-image: @gardient;
-  background-image: @gardientLinear;
-  background-image: @gardientMoz;
-  background-image: @gardientWebk;
-  background-image: @gardientMs;
+  background: @gardient;
+  background: @gardientMozL;
+  background: @gardientWeb;
+  background: @gardientWebL;
+  background: @gardientOL;
+  background: @gardientMsL;
+  background: @gardientL;
+  filter: @gardientFilter;
   color: @textColorButton;
 }
 
@@ -394,6 +458,17 @@ input[type=submit], button{
   border-radius: @borderR;
   margin-top: 1em;
   box-shadow: @boxShadow;
+}
+
+button:hover, input[type=submit]:hover, {
+  background: @hoverGardient;
+  background: @hoverGardientMozL;
+  background: @hoverGardientWeb;
+  background: @hoverGardientWebL;
+  background: @hoverGardientOL;
+  background: @hoverGardientMsL;
+  background: @hoverGardientL;
+  filter: @hoverFilter;
 }
 
 button a{
@@ -408,28 +483,492 @@ button a{
 /*************** MEDIA 481px **************/
 
 @media only screen and (max-width: 481px){
-  body{
-    background-color: yellow;
+//Contenu générale
+  .container{
+    width: 100%;
+    margin: 0 auto;
   }
+
+  .error, .membre{
+    .column(9);
+    .push(1);
+    margin-bottom: 2em;
+  }
+
+  body>footer p{
+    width: 100%;
+  }
+
+  body>footer{
+    height: 75px;
+  }
+
+  .formConnexion .ajoutInput input, input[type=text]{
+    width: 96%;
+  }
+
+  input{
+    height: 25px;
+  }
+
+//Connexion/déconnexion
+  .logOff, section footer a:hover, section footer strong, .error a{
+    background: @gardient;
+    background: @gardientMozL;
+    background: @gardientWeb;
+    background: @gardientWebL;
+    background: @gardientOL;
+    background: @gardientMsL;
+    background: @gardientL;
+  }
+
+  .logOff{
+    height: 50px;
+    .column(12);
+    filter: @gardientFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  .logOff a{
+    height: 35px;
+    .column(12);
+    padding-top: 1.25em;
+    text-decoration: none;
+    color: @textColorButton;
+  }
+
+  section footer a, section footer strong, .error a, .error p a:hover{
+    padding: 0.5em;
+    display: inline-block;
+    text-decoration: none;
+    color: @textColorButton;
+  }
+
+  .logOff a:hover, section footer a:hover{
+    color: @textColorButton;
+  }
+
+  .logOff:hover, section footer strong:hover, section footer a, .error a:hover{
+    background: @hoverGardient;
+    background: @hoverGardientMozL;
+    background: @hoverGardientWeb;
+    background: @hoverGardientWebL;
+    background: @hoverGardientOL;
+    background: @hoverGardientMsL;
+    background: @hoverGardientL;
+    filter: @hoverFilter;
+  }
+
+  header h2, .lien input[type="text"], .lien input[type="submit"]{
+    .column(12);
+    margin-bottom: 1em;
+  }
+
+  //Lien URL partage
+  .lien input[type=text]{
+    width: 96%;
+  }
+
+  .lien{
+    height: 70px;
+  }
+
+//Bouton de modification/supression
+  article{
+    padding-bottom: 6.5em;
+  }
+
+  .modifier p:last-child{
+    background: @updateGardient;
+    background: @updateGardientMozL;
+    background: @updateGardientWebL;
+    background: @updateGardientWeb;
+    background: @updateGardientOL;
+    background: @updateGardientMsL;
+    background: @updateGardientL;
+    filter: @updateFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:last-child:hover{
+    background: @hoverUpdateGardient;
+    background: @hoverUpdateGardientMozL;
+    background: @hoverUpdateGardientWebL;
+    background: @hoverUpdateGardientWeb;
+    background: @hoverUpdateGardientOL;
+    background: @hoverUpdateGardientMsL;
+    background: @hoverUpdateGardientL;
+    filter: @hoverUpdateFilter;
+  }
+
+  .modifier p:first-child{
+    background: @deletGardient;
+    background: @deletGardientMozL;
+    background: @deletGardientWebL;
+    background: @deletGardientWeb;
+    background: @deletGardientOL;
+    background: @deletGardientMsL;
+    background: @deletGardientL;
+    filter: @deletFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:first-child:hover{
+    background: @hoverDeletGardient;
+    background: @hoverDeletGardientMozL;
+    background: @hoverDeletGardientWebL;
+    background: @hoverDeletGardientWeb;
+    background: @hoverDeletGardientOL;
+    background: @hoverDeletGardientMsL;
+    background: @hoverDeletGardientL;
+    filter: @hoverDeletFilter;
+  }
+
+  .modifier a,  .modifier .icon-pencil-alt a:hover, .modifier .icon-cancel a:hover, .error a{
+    color: @textColorButton;
+    text-decoration: none;
+  }
+
+  .modifier p{
+    .column(12);
+    padding: 0.5em 0;
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    color: @textColorButton;
+  }
+
+//Pagination + bouton erreur
+  section footer a, section footer strong, .error a{
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  section footer a, section footer strong{
+    width: 10px;
+  }
+
+  //Image
+  article img{
+    max-width: 250px;
+  }
+
+  //Boutton
+  button{
+    width: 75px;
+  }
+
 }
+
 /*************** MEDIA 482px - 768px **************/
-@media only screen and (min-width: 483px) and (max-width: 768px) {
-  body{
-    background-color: red;
+//@media only screen and (max-width: 768px) and (min-width: 483px)
+@media only screen and (min-width: 483px) and (max-width: 768px){
+//Contenu générale
+  .container{
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .error, .membre{
+    .column(10);
+    .push(1);
+    margin-bottom: 2em;
+  }
+
+  body>footer p{
+    width: 100%;
+  }
+
+  body>footer{
+    height: 100px;
+  }
+
+  .formConnexion .ajoutInput input, input[type=text]{
+    width: 97%;
+  }
+
+  input{
+    height: 25px;
+  }
+
+//Connexion/déconnexion
+  .logOff, section footer a:hover, section footer strong, .error a{
+    background: @gardient;
+    background: @gardientMozL;
+    background: @gardientWeb;
+    background: @gardientWebL;
+    background: @gardientOL;
+    background: @gardientMsL;
+    background: @gardientL;
+  }
+
+  .logOff{
+    height: 31px;
+    .column(4);
+    filter: @gardientFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  .logOff a, .modifier p, section footer a, section footer strong, .error a, .error p a:hover{
+    padding: 0.5em;
+    display: inline-block;
+    text-decoration: none;
+    color: @textColorButton;
+  }
+
+  .logOff a:hover, section footer a:hover{
+    color: @textColorButton;
+  }
+
+  .logOff:hover, section footer strong:hover, section footer a, .error a:hover{
+    background: @hoverGardient;
+    background: @hoverGardientMozL;
+    background: @hoverGardientWeb;
+    background: @hoverGardientWebL;
+    background: @hoverGardientOL;
+    background: @hoverGardientMsL;
+    background: @hoverGardientL;
+    filter: @hoverFilter;
+  }
+
+  header h2{
+    .column(8);
+  }
+
+//Bouton de modification/supression
+
+  article{
+    padding-bottom: 2em;
+  }
+
+  .modifier p:last-child{
+    background: @updateGardient;
+    background: @updateGardientMozL;
+    background: @updateGardientWebL;
+    background: @updateGardientWeb;
+    background: @updateGardientOL;
+    background: @updateGardientMsL;
+    background: @updateGardientL;
+    filter: @updateFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:last-child:hover{
+    background: @hoverUpdateGardient;
+    background: @hoverUpdateGardientMozL;
+    background: @hoverUpdateGardientWebL;
+    background: @hoverUpdateGardientWeb;
+    background: @hoverUpdateGardientOL;
+    background: @hoverUpdateGardientMsL;
+    background: @hoverUpdateGardientL;
+    filter: @hoverUpdateFilter;
+  }
+
+  .modifier p:first-child{
+    background: @deletGardient;
+    background: @deletGardientMozL;
+    background: @deletGardientWebL;
+    background: @deletGardientWeb;
+    background: @deletGardientOL;
+    background: @deletGardientMsL;
+    background: @deletGardientL;
+    filter: @deletFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:first-child:hover{
+    background: @hoverDeletGardient;
+    background: @hoverDeletGardientMozL;
+    background: @hoverDeletGardientWebL;
+    background: @hoverDeletGardientWeb;
+    background: @hoverDeletGardientOL;
+    background: @hoverDeletGardientMsL;
+    background: @hoverDeletGardientL;
+    filter: @hoverDeletFilter;
+  }
+
+  .modifier a,  .modifier .icon-pencil-alt a:hover, .modifier .icon-cancel a:hover, .error a{
+    color: @textColorButton;
+    text-decoration: none;
+  }
+
+  .modifier p{
+    color: @textColorButton;
+  }
+
+//Pagination + bouton erreur
+  section footer a, section footer strong, .error a{
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  section footer a, section footer strong{
+    width: 10px;
   }
 
 }
 
 /*************** MEDIA 945px - 770px **************/
-@media only screen and (min-width: 770px) and (max-width: 950px) {
-    body{
-      max-width: 825px;
-      min-width: 770px;
+
+@media only screen and (max-width: 950px) and (min-width: 770px) {
+  //Contenu générale
+  .container{
+      width: 100%;
       margin: 0 auto;
-      background-color: blue;
     }
 
-  .lien input[type="text"]{
-    width: 500px;
+  .error, .membre{
+    .column(10);
+    .push(1);
   }
+
+  body>footer p{
+    width: 100%;
+  }
+
+  //Connexion/déconnexion
+  .logOff, section footer a:hover, section footer strong .error a{
+
+    background: @gardient;
+    background: @gardientMozL;
+    background: @gardientWeb;
+    background: @gardientWebL;
+    background: @gardientOL;
+    background: @gardientMsL;
+    background: @gardientL;
+  }
+
+  .logOff{
+    height: 31px;
+    .column(4);
+    filter: @gardientFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  .logOff a, .modifier p, section footer a, section footer strong, .error a, .error p a:hover{
+    padding: 0.5em;
+    display: inline-block;
+    text-decoration: none;
+    color: @textColorButton;
+  }
+
+  .logOff a:hover, section footer a:hover{
+    color: @textColorButton;
+  }
+
+  .logOff:hover, section footer strong:hover, section footer a, .error a:hover{
+    background: @hoverGardient;
+    background: @hoverGardientMozL;
+    background: @hoverGardientWeb;
+    background: @hoverGardientWebL;
+    background: @hoverGardientOL;
+    background: @hoverGardientMsL;
+    background: @hoverGardientL;
+    filter: @hoverFilter;
+  }
+
+  header h2{
+    .column(8);
+  }
+
+  //Bouton de modification/supression
+  .modifier p:last-child{
+    background: @updateGardient;
+    background: @updateGardientMozL;
+    background: @updateGardientWebL;
+    background: @updateGardientWeb;
+    background: @updateGardientOL;
+    background: @updateGardientMsL;
+    background: @updateGardientL;
+    filter: @updateFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:last-child:hover{
+    background: @hoverUpdateGardient;
+    background: @hoverUpdateGardientMozL;
+    background: @hoverUpdateGardientWebL;
+    background: @hoverUpdateGardientWeb;
+    background: @hoverUpdateGardientOL;
+    background: @hoverUpdateGardientMsL;
+    background: @hoverUpdateGardientL;
+    filter: @hoverUpdateFilter;
+  }
+
+  .modifier p:first-child{
+    background: @deletGardient;
+    background: @deletGardientMozL;
+    background: @deletGardientWebL;
+    background: @deletGardientWeb;
+    background: @deletGardientOL;
+    background: @deletGardientMsL;
+    background: @deletGardientL;
+    filter: @deletFilter;
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+  }
+
+  .modifier p:first-child:hover{
+    background: @hoverDeletGardient;
+    background: @hoverDeletGardientMozL;
+    background: @hoverDeletGardientWebL;
+    background: @hoverDeletGardientWeb;
+    background: @hoverDeletGardientOL;
+    background: @hoverDeletGardientMsL;
+    background: @hoverDeletGardientL;
+    filter: @hoverDeletFilter;
+
+  }
+
+  .modifier a,  .modifier .icon-pencil-alt a:hover, .modifier .icon-cancel a:hover, .error a{
+    color: @textColorButton;
+    text-decoration: none;
+  }
+
+  //Pagination + bouton erreur
+  section footer a, section footer strong, .error a{
+    -webkit-border-radius: @borderRWebK;
+    -moz-border-radius: @borderRMoz;
+    border-radius: @borderR;
+    text-align: center;
+    box-shadow: @boxShadow;
+  }
+
+  section footer a, section footer strong{
+    width: 10px;
+  }
+
+  input{
+    height: 25px;
+  }
+
 }

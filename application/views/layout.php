@@ -2,6 +2,7 @@
 <html lang="fr-BE">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
     <script type="text/javascript" src="<?php echo base_url('web/jquery.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('web/javascript.js'); ?>"></script>
