@@ -9,6 +9,6 @@
 
         <p>Vous avez intégré un URL non valide</p>
 
-        <p><?php echo anchor("post/ajouter/", 'Retour sur la page d\'accueil', array('title' => 'Retour sur la page d\'accueil')); ?></p>
+        <p><?php echo anchor("post/lister/", 'Retour sur la page d\'accueil', array('title' => 'Retour sur la page d\'accueil')); ?></p>
     </div>
 </section>

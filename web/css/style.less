@@ -166,6 +166,13 @@ blockquote, q {
 /************************************************
 /* FIN RESTE MEYER
 ************************************************/
+
+/* IE */
+header, nav, section, article, aside, footer {
+  display:block;
+}
+
+/*  General */
 html, body{
   height: 100%;
 }
@@ -460,7 +467,7 @@ input[type=submit], button{
   box-shadow: @boxShadow;
 }
 
-button:hover, input[type=submit]:hover, {
+button:hover, input[type=submit]:hover{
   background: @hoverGardient;
   background: @hoverGardientMozL;
   background: @hoverGardientWeb;
@@ -469,6 +476,19 @@ button:hover, input[type=submit]:hover, {
   background: @hoverGardientMsL;
   background: @hoverGardientL;
   filter: @hoverFilter;
+  border: 1px solid grey;
+}
+
+input[type=submit]:active{
+  border: 1px solid grey;
+  background: @gardient;
+  background: @gardientMozL;
+  background: @gardientWeb;
+  background: @gardientWebL;
+  background: @gardientOL;
+  background: @gardientMsL;
+  background: @gardientL;
+  filter: @gardientFilter;
 }
 
 button a{

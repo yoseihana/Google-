@@ -32,7 +32,7 @@ class Post extends CI_Controller
         $config = array();
         $config['base_url'] = 'http://sharelink.buffart.eu/index.php/post/lister/';
         $config['total_rows'] = $this->M_Post->countPost();
-        $config['per_page'] = 2;
+        $config['per_page'] = 5;
         $config['num_links'] = 10;
         $config["uri_segment"] = 3;
 
@@ -71,14 +71,22 @@ class Post extends CI_Controller
             return false;
         }
 
+        //Si $lien ne fini pas par /
+        if(!preg_match('/^[^ ]+\/$/i', $lien)){
+            $lien = $lien.'/';
+        }
+
         //Recherche l'occurence .html dans $liens
         if (strpbrk($lien, '.html'))
         {
+
+
             //Recherche la position dans $lien de "/"
             $newL = strrpos($lien, "/");
             //Retourne la chaine $lien commencant à l'occurence 0 et à length = $newL
             $url = substr($lien, 0, $newL);
         }
+
 
         //Appel la fct via l'objet m_post
         $html = $this->file_get_contents_curl($lien);
@@ -92,11 +100,8 @@ class Post extends CI_Controller
         $data['titre'] = $DomNodeList->item(0)->nodeValue;
         $data['title'] = 'Ajout d\'un lien ' . $data['titre'];
 
-
         //Intégration du meta description
         $DomNodeList = $htmlDom->getElementsByTagName('meta');
-
-
 
         //Boucle sur les ittérations de <meta>
         $descriptionNode = null;
@@ -125,10 +130,9 @@ class Post extends CI_Controller
         foreach ($DomNodeList as $node)
         {
             $src = $node->getAttribute('src');
+
             $src = $this->relAbs($url, $src);
             $header = get_headers($src);
-            //print_r($header);
-            //TODO http_get
 
             if (stripos($header[0], '404 Not Found') == false)
             {

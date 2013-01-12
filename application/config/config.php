@@ -14,8 +14,7 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://sharelink.buffart.eu';
-$config['base_url']	= 'http://localhost:8888/WebD/google/';
+$config['base_url']	= 'http://sharelink.buffart.eu';
 
 /*
 |--------------------------------------------------------------------------
