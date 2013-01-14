@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?></title>
-    <script type="text/javascript" src="<?php echo base_url('web/js/jquery.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('web/js/javascript.js'); ?>"></script>
+
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/style.css'); ?>" media="screen" title="Normal"/>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/fontello-codes.css'); ?>" media="screen" title="Normal"/>
@@ -32,6 +31,10 @@
 <footer>
     <p>"Partages tes sites" réalisé par Annabelle Buffart - INPRES Janvier 2012</p>
 </footer>
+
+<script type="text/javascript" src="<?php echo base_url('web/js/jquery.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('web/js/javascript.js'); ?>"></script>
+
 </body>
 
 </html>

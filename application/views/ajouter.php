@@ -2,7 +2,7 @@
     <header>
         <h1><?php echo anchor(base_url('index.php/post/lister'), 'Partager un site sur "Partages tes sites"!', array('title' => 'Accueil du site de partages')); ?></h1>
 
-        <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title' => 'Aller sur le site ' . $url, 'alt' => 'Aller sur le site ' . $url)); ?></h2>
+        <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title' => 'Aller sur le site ' . $url)); ?></h2>
 
         <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
     </header>

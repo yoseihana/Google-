@@ -24,7 +24,7 @@
                 <p><?php echo $post->commentaire; ?></p>
 
                 <div class="infoSite">
-                    <p class="site"><?php echo anchor($post->lien, $post->titre, array('title' => $post->titre, 'alt' => $post->titre)); ?></p>
+                    <p class="site"><?php echo anchor($post->lien, $post->titre, array('title' => $post->titre)); ?></p>
 
                     <p class="propos"><?php echo $post->description; ?></p>
 

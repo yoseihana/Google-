@@ -9,15 +9,14 @@
         echo '<div class="ajoutInput">';
         $emailInput = array('name' => 'email', 'id' => 'email', 'placeholder' => 'Votre email');
         echo form_input($emailInput);
-        //$data['error_email'];
         echo '</div>';
         echo '<div class="ajoutInput">';
         $mdpInput = array('name' => 'mdp', 'id' => 'mdp', 'placeholder' => 'Votre mot de passe');
         echo form_password($mdpInput);
         echo '</div>';
         echo '<div class="boutton">';
-        echo anchor('membre/ajoutermembre', form_button('Connexion', 'M\'inscrire!'), array('title' => 'Création d\'un nouveau compte', 'alt' => 'Création d\'un nouveau compte'));;
-        echo form_submit('check', 'Vérifier', 'icon-lock');
+        echo anchor('membre/ajoutermembre', form_button('Connexion', 'M\'inscrire!'), array('title' => 'Création d\'un nouveau compte'));;
+        echo form_submit('check', 'Vérifier');
         echo '</div>';
         echo form_close();
         ?>

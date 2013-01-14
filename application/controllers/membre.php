@@ -53,7 +53,7 @@ class Membre extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Membre');
-        $dataList['title'] = "S'inscrire sur le site Partage ton site";
+        $dataList['title'] = 'S\'inscrire sur le site Partage ton site';
 
 
         $dataLayout['vue'] = $this->load->view('ajoutermembre', $dataList, true);
@@ -103,12 +103,8 @@ class Membre extends CI_Controller
 
             echo $this->email->print_debugger();
 
-            redirect("success/success_membre");
-        }/*else{
-
-            $data['message'] = $message;
-            var_dump($data['message']);
-        }*/
+            redirect('success/success_membre');
+        }
     }
 
 
@@ -120,9 +116,7 @@ class Membre extends CI_Controller
         // Renvoyer une erreur car au moins un des 3 champs n'est pas remplis
         if (!trim($pseudo) OR !trim($email) OR !trim($mdp))
         {
-            var_dump('Aucun caractère');
-            //$message = 'Veilles à bien compléter les champs';
-            //return $message;
+            redirect('error/error_field');
             return false;
         }
 
@@ -138,7 +132,7 @@ class Membre extends CI_Controller
 
         } else
         {
-            var_dump('Mauvais caractères dans le pseudo');
+            redirect('error/error_pseudo');
             return false;
         }
 
@@ -153,7 +147,7 @@ class Membre extends CI_Controller
             }
         } else
         {
-            var_dump('Mauvais caractères');
+            redirect('error/error_letter');
             return false;
         }
 
@@ -161,7 +155,7 @@ class Membre extends CI_Controller
         // Verifier le mdp
         if (!preg_match('/^(\S{4,12})$/', $mdp))
         {
-            var_dump('Le mot de passe ne contient pas le nombre de caractières nécessaire. Minimum 4 et maximum 12');
+            redirect('error/error_password');
             return false;
         }
 

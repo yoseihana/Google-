@@ -69,4 +69,28 @@ class Error extends CI_Controller
         $dataLayout['vue'] = $this->load->view('error_post_exist', $data, true);
         $this->load->view('layout', $dataLayout);
     }
+
+    public function error_pseudo(){
+        $data['title'] = 'Erreur lors de la création du compte';
+        $dataLayout['vue'] = $this->load->view('error_pseudo', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_field(){
+        $data['title'] = 'Erreur lors de la création du compte';
+        $dataLayout['vue'] = $this->load->view('error_field', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_letter(){
+        $data['title'] = 'Erreur lors de la création du compte';
+        $dataLayout['vue'] = $this->load->view('error_letter', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
+
+    public function error_password(){
+        $data['title'] = 'Erreur lors de la création du compte';
+        $dataLayout['vue'] = $this->load->view('error_password', $data, true);
+        $this->load->view('layout', $dataLayout);
+    }
 }

@@ -7,10 +7,10 @@ class Post extends CI_Controller
     {
         parent::__construct();
 
-        if (!($this->session->userdata('logged_in')))
+        /*if (!($this->session->userdata('logged_in')))
         {
             redirect('membre');
-        }
+        }*/
     }
 
     public function index()
@@ -55,7 +55,7 @@ class Post extends CI_Controller
 
     public function ajouter()
     {
-        $data['membre'] = $this->session->userdata('logged_in');
+        //$data['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->model('M_Post');
