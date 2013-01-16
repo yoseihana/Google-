@@ -1,10 +1,12 @@
 <div class="content">
     <header>
-        <h1><?php echo anchor(base_url('index.php/post/lister'), 'Modifier le site partagé"!', array('title' => 'Accueil du site de partage')); ?></h1>
+        <hgroup>
+            <h1><?php echo anchor(base_url('index.php/post/lister'), 'Modifier le site partagé', array('title' => 'Accueil du site de partage')); ?></h1>
 
-        <h2><?php echo $titre; ?></h2>
+            <h2><?php echo $titre; ?></h2>
 
-        <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
+            <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
+        </hgroup>
     </header>
     <section>
         <div class="sectionContent">
@@ -21,9 +23,9 @@
             $descriptionText = array('name' => 'description', 'value' => $description, 'cols' => '54', 'rows' => '5', 'id' => 'description');
             echo form_textarea($descriptionText);
             echo '</div>';
-            echo'<div class="boutton">';
+            echo '<div class="boutton">';
             echo form_hidden('id_post', $id_post);
-            echo  anchor('post/lister', form_button('Retour','Retour'), array('title' => 'Retour sur a page d\'accueil');
+            echo form_button('Retour', anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil')));
             echo form_submit('Modifier', 'Modifier!');
             echo '</div>';
             echo form_close();

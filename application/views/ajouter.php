@@ -1,10 +1,12 @@
 <div class="content">
     <header>
-        <h1><?php echo anchor(base_url('index.php/post/lister'), 'Partager un site sur "Partages tes sites"!', array('title' => 'Accueil du site de partages')); ?></h1>
+        <hgroup>
+            <h1><?php echo anchor(base_url('index.php/post/lister'), 'Partager un site sur Partages Tes Sites', array('title' => 'Accueil du site de partages')); ?></h1>
 
-        <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title' => 'Aller sur le site ' . $url)); ?></h2>
+            <h2>Veux-tu partager ce site, <?php echo $membre->pseudo; ?>? <?php echo anchor($url, $url, array('title' => 'Aller sur le site ' . $url)); ?></h2>
 
-        <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
+            <p class="logOff"><?php echo anchor('membre/unlogin', 'Se déconnecter'); ?></p>
+        </hgroup>
     </header>
     <section>
         <div class="sectionContent">
@@ -26,10 +28,10 @@
             <div class="images">
                 <?php if (isset($images)): ?>
                 <?php for ($i = 0; $i < count($images); ++$i): ?>
-                    <div class="inputImg">
-                        <input type="radio" id="<?php echo $i; ?>" name="image" value="<?php echo $images[$i]; ?>" <?php echo set_radio('image', $images[$i]); ?>  />
+                    <div class="inputImg" role="application">
+                        <input aria-labelledby="<?php echo $i; ?>" type="radio" role="radio" id="<?php echo $i; ?>" name="image" value="<?php echo $images[$i]; ?>" <?php echo set_radio('image', $images[$i]); ?>  />
 
-                        <label for="<?php echo $i; ?>" ><?php echo img($images[$i]); ?></label>
+                        <label id="<?php echo $i; ?>" for="<?php echo $i; ?>"><?php echo img($images[$i]); ?></label>
                     </div>
                     <?php endfor; ?>
                 <?php endif; ?>
@@ -37,8 +39,8 @@
             <div class="boutton">
                 <?php echo form_hidden('membre', $membre->id_membre);
                 echo form_hidden('lien', $url);
-                echo anchor('post/lister', form_button('Retour', 'Retour'), array('title' => 'Retour sur a page d\'accueil'));
-                echo form_submit('Envoyer', 'Ajouter ce lien!');
+                echo form_button('Retour', anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil')));
+                echo form_submit('Envoyer', 'Ajouter ce lien');
                 echo form_close();
                 ?>
             </div>

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: annabelle
- * Date: 16/10/12
- * Time: 16:15
- * To change this template use File | Settings | File Templates.
- */
 
 class Membre extends CI_Controller
 {
@@ -13,7 +6,7 @@ class Membre extends CI_Controller
     public function index()
     {
         $this->load->helper('form');
-        $data['title'] = 'Se connecter à Partage ton lien';
+        $data['title'] = 'Se connecter à Partages Tes Sites';
         $data['vue'] = $this->load->view('connecter', $data, true);
         $this->load->view('layout', $data);
     }
@@ -27,7 +20,7 @@ class Membre extends CI_Controller
         $data['mdp'] = $this->input->post('mdp');
         $data['mdp'] = do_hash($data['mdp'], 'md5');
         $data['email'] = $this->input->post('email');
-        $data['title'] = 'Se connecter à Partage ton lien';
+        $data['title'] = 'Se connecter à Partages Tes Sites';
 
         //Vérification si des données sont entrée
         if ($this->M_Membre->verifier($data))
@@ -53,7 +46,7 @@ class Membre extends CI_Controller
         $this->load->helper('form');
         $this->load->helper('html');
         $this->load->model('M_Membre');
-        $dataList['title'] = 'S\'inscrire sur le site Partage ton site';
+        $dataList['title'] = 'S\'inscrire sur le sitePartages Tes Sites';
 
 
         $dataLayout['vue'] = $this->load->view('ajoutermembre', $dataList, true);
@@ -72,19 +65,19 @@ class Membre extends CI_Controller
         $pseudo = $this->input->post('pseudo');
         $mdp = $this->input->post('mdp');
 
-        $this->email->from('anna.buffart@gmail.com', 'Partages tes liens');
+        $this->email->from('anna.buffart@gmail.com', 'Partages Tes Sites');
         $this->email->to($email);
         $this->email->cc('anna.buffart@gmail.com');
 
-        $this->email->subject('Inscription sur le site "Partages tes sites"');
+        $this->email->subject('Inscription sur le site Partages Tes Sites');
         $this->email->message('Bonjour,
         Nous prenons compte de ton inscription sur le site www.sharelink.buffart.eu.
 
-        Tu peux dés lors te connecter sur le site via ton email et mot de passe. Bon partages!
+        Tu peux dés lors te connecter sur le site via ton email et mot de passe. Bon partages&nbsp;!
 
         Cordialement,
 
-        L\'équipe de Partages tes liens');
+        L\'équipe de Partages Tes Sites');
 
         $isNewMembre = $this->checkNew($pseudo, $email, $mdp);
 

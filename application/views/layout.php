@@ -29,11 +29,8 @@
     <?php echo $vue; ?>
 </div>
 <footer>
-    <p>"Partages tes sites" réalisé par Annabelle Buffart - INPRES Janvier 2012</p>
+    <p>Partages Tes Sites; réalisé par Annabelle Buffart &ndash; INPRES Janvier 2012</p>
 </footer>
-
-<script type="text/javascript" src="<?php echo base_url('web/js/jquery.js'); ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('web/js/javascript.js'); ?>"></script>
 
 </body>
 

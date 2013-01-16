@@ -5,12 +5,12 @@ class Post extends CI_Controller
 
     public function __construct()
     {
-        parent::__construct();
+       parent::__construct();
 
-        /*if (!($this->session->userdata('logged_in')))
+        if (!($this->session->userdata('logged_in')))
         {
             redirect('membre');
-        }*/
+        }
     }
 
     public function index()
@@ -55,7 +55,7 @@ class Post extends CI_Controller
 
     public function ajouter()
     {
-        //$data['membre'] = $this->session->userdata('logged_in');
+        $data['membre'] = $this->session->userdata('logged_in');
         $this->load->helper('html');
         $this->load->helper('form');
         $this->load->model('M_Post');
@@ -181,6 +181,7 @@ class Post extends CI_Controller
 
         $data['image'] = $this->input->post('image');
         $data['id_membre'] = $this->input->post('membre');
+        //$data['id_membre'] = '1';
         $data['lien'] = $this->input->post('lien');
 
         $this->M_Post->creer($data);

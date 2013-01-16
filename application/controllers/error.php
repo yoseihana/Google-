@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: annabelle
- * Date: 23/10/12
- * Time: 11:52
- * To change this template use File | Settings | File Templates.
- */
 
 class Error extends CI_Controller
 {
@@ -27,13 +20,6 @@ class Error extends CI_Controller
     {
         $data['title'] = 'Erreur de lien';
         $dataLayout['vue'] = $this->load->view('error_utilisateur', $data, true);
-        $this->load->view('layout', $dataLayout);
-    }
-
-    public function error_lien_ajout()
-    {
-        $data['title'] = 'Erreur de lien';
-        $dataLayout['vue'] = $this->load->view('error_lien_ajout', $data, true);
         $this->load->view('layout', $dataLayout);
     }
 
