@@ -31,6 +31,7 @@
 
                     <p class="propos"><?php echo $post->description; ?></p>
 
+                    <?php if($post->image !== null): ?>
                     <p class="image" itemprop="image" ><?php
                         $img_prop = array(
                             'src' => $post->image,
@@ -38,6 +39,9 @@
                             'title' => $post->titre,
                         );
                         echo anchor($post->lien, img($img_prop), array('title' => $post->titre)); ?></p>
+                     <?php  else: ?>
+                        <p>Il n'y a pas d'image pour ce poste</p>
+                      <?php endif; ?>
 
                 </div>
                 <?php if ($membre->pseudo == $post->pseudo): ?>

@@ -1,5 +1,5 @@
 <header>
-    <h1>Connexion des membres du site Partages Tes Sites;</h1>
+    <h1>Connexion des membres du site Partages Tes Sites</h1>
 </header>
 <section>
     <div class="membre">
@@ -15,7 +15,7 @@
         echo form_password($mdpInput);
         echo '</div>';
         echo '<div class="boutton">';
-        echo form_button('Connexion', anchor('membre/ajoutermembre', 'M\'inscrire&nbsp;', array('title' => 'Création d\'un nouveau compte')));
+        echo anchor('membre/ajoutermembre', 'M\'inscrire&nbsp;', array('title' => 'Création d\'un nouveau compte'));
         echo form_submit('check', 'Vérifier');
         echo '</div>';
         echo form_close();

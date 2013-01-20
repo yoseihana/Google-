@@ -44,7 +44,7 @@ class Post extends CI_Controller
         {
             if (empty($post->image))
             {
-                $post->image = 'web/img/no-pre.png';
+                $post->image = null;
             }
         }
 
@@ -145,7 +145,7 @@ class Post extends CI_Controller
                 {
                     $size = getimagesize($src);
 
-                    if ($size[0] >= '150' && $size[0] <= '800')
+                    if ($size[0] >= '50' && $size[0] <= '900')
                     {
                         $data['images'][] = $src;
                     }

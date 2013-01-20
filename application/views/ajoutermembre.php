@@ -22,7 +22,7 @@
         echo '</div>';
         echo '<p>Le mot de passe doit contenir entre 4 et 12 caractères</p>';
         echo '<div class="boutton already-mem">';
-        echo form_button('Connexion', anchor('membre', 'Déjà inscrit&nbsp;', array('title' => 'Retour sur la page de connection')));
+        echo anchor('membre', 'Déjà inscrit&nbsp;', array('title' => 'Retour sur la page de connection'));
         echo form_submit('check', 'M\'inscrire');
         echo '</div>';
         echo form_close();

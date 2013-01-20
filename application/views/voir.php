@@ -25,7 +25,7 @@
             echo '</div>';
             echo '<div class="boutton">';
             echo form_hidden('id_post', $id_post);
-            echo form_button('Retour', anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil')));
+            echo anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil'));
             echo form_submit('Modifier', 'Modifier!');
             echo '</div>';
             echo form_close();

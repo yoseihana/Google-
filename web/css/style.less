@@ -366,33 +366,24 @@ input[type=radio]{
   clear: both;
 }
 
-.boutton input[type=submit], .boutton button, .boutton input[type=button]{
+.boutton input[type=submit], .boutton a{
   .column(4);
   margin-bottom: 1em;
 }
 
 .boutton a{
-  padding: 0.5em 3.5em;
-}
-
-.already-mem a{
-  padding: 0em;
+  padding-top: 0.25em;
+  height: 16px;
+  text-align: center;
+  font-size: 0.85em;
 }
 
 .boutton input[type="submit"]{
-  .push(4);
+  .push(3.5);
 }
 
 .boutton input[type="submit"]{
   margin-top: 0em;
-}
-
-.boutton button{
-  margin-top: 1em;
-}
-
-.sectionContent .boutton a{
-  padding: 0.5em 9em;
 }
 
 /* Formulaire de connexion et ajout membre */
@@ -405,9 +396,7 @@ input{
   width: 99%;
 }
 
-input[type=submit], button{
-  width: 125px;
-  height: 28px;
+input[type=submit], .boutton a{
   background: @gardient;
   background: @gardientMozL;
   background: @gardientWeb;
@@ -419,7 +408,7 @@ input[type=submit], button{
   color: @textColorButton;
 }
 
-.membre input[type=submit], button, .postModifcation input[type=submit], .boutton input[type=submit]{
+.membre input[type=submit], .boutton a, .postModifcation input[type=submit], .boutton input[type=submit]{
   -webkit-border-radius: @borderRWebK;
   -moz-border-radius: @borderRMoz;
   border-radius: @borderR;
@@ -427,7 +416,7 @@ input[type=submit], button{
   box-shadow: @boxShadow;
 }
 
-button:hover, input[type=submit]:hover{
+.boutton a:hover, input[type=submit]:hover{
   background: @hoverGardient;
   background: @hoverGardientMozL;
   background: @hoverGardientWeb;
@@ -439,7 +428,7 @@ button:hover, input[type=submit]:hover{
   border: 1px solid grey;
 }
 
-input[type=submit]:active, .boutton button:active{
+input[type=submit]:active, .boutton a:active{
   border: 1px solid grey;
   background: @gardient;
   background: @gardientMozL;
@@ -449,10 +438,6 @@ input[type=submit]:active, .boutton button:active{
   background: @gardientMsL;
   background: @gardientL;
   filter: @gardientFilter;
-}
-
-button a{
-  color: @textColorButton;
 }
 
 /*  Page d'erreur */
@@ -643,11 +628,6 @@ button a{
   //Image
   article img{
     max-width: 250px;
-  }
-
-  //Boutton
-  button{
-    width: 75px;
   }
 }
 

@@ -34,12 +34,14 @@
                         <label id="<?php echo $i; ?>" for="<?php echo $i; ?>"><?php echo img($images[$i]); ?></label>
                     </div>
                     <?php endfor; ?>
+                <?php else: ?>
+                    <p>Il n'y a pas d'image pour ce poste</p>
                 <?php endif; ?>
             </div>
             <div class="boutton">
                 <?php echo form_hidden('membre', $membre->id_membre);
                 echo form_hidden('lien', $url);
-                echo form_button('Retour', anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil')));
+                echo anchor('post/lister', 'Retour', array('title' => 'Retour sur a page d\'accueil'));
                 echo form_submit('Envoyer', 'Ajouter ce lien');
                 echo form_close();
                 ?>
