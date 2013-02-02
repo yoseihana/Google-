@@ -22,11 +22,6 @@
     <title><?php echo $title ?></title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/style.css'); ?>" media="screen" title="Normal"/>
-
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/fontello-codes.css'); ?>" media="screen" title="Normal"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/fontello-ie7-codes.css'); ?>" media="screen" title="Normal"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/fontello-ie7.css'); ?>" media="screen" title="Normal"/>
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/fontello.css'); ?>" media="screen" title="Normal"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('web/css/print.css'); ?>" media="print" title="Normal"/>
 
     <!--[if lt IE 9]>

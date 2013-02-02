@@ -1,5 +1,10 @@
 /*  Reset */
-@impot 'reset.css';
+@import 'reset.css';
+@import 'fontello-ie7-codes.css';
+@import 'fontello-ie7.css';
+@import 'fontello.css';
+@import 'fontello-codes.css';
+
 
 /* Import GRID */
 @import 'grid.less';
@@ -534,6 +539,10 @@ input[type=submit]:active, .boutton a:active{
     margin-bottom: 1em;
   }
 
+  .lien input[type="submit"]{
+    height: 35px;
+  }
+
   //Lien URL partage
   .lien input[type=text]{
     width: 96%;
@@ -786,6 +795,11 @@ input[type=submit]:active, .boutton a:active{
 
   .postFooter a, .postFooter strong{
     width: 10px;
+  }
+
+//Image
+  article img{
+    max-width: 440px;
   }
 
 }

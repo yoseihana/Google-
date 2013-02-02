@@ -97,7 +97,8 @@ class Post extends CI_Controller
 
         //intégartion du title
         $DomNodeList = $htmlDom->getElementsByTagName('title');
-        $data['titre'] = $DomNodeList->item(0)->nodeValue;
+        //$data['titre'] = $DomNodeList->item(0)->nodeValue;
+        $data['titre']= utf8_encode($DomNodeList->item(0)->nodeValue);
         $data['title'] = 'Ajout d\'un lien ' . $data['titre'];
 
         //Intégration du meta description
@@ -120,7 +121,8 @@ class Post extends CI_Controller
             $data['description'] = 'Il n\' a pas de description pour ce site';
         } else
         {
-            $data['description'] = $descriptionNode->getAttribute('content');
+           // $data['description'] = $descriptionNode->getAttribute('content');
+            $data['description'] = utf8_encode($descriptionNode->getAttribute('content'));
         }
 
 

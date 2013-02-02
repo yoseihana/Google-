@@ -16,7 +16,7 @@
         echo '</div>';
         echo '<div class="boutton">';
         echo anchor('membre/ajoutermembre', 'M\'inscrire&nbsp;', array('title' => 'Création d\'un nouveau compte'));
-        echo form_submit('check', 'Vérifier');
+        echo form_submit('check', 'Connexion');
         echo '</div>';
         echo form_close();
         ?>

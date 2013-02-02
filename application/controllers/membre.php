@@ -71,9 +71,14 @@ class Membre extends CI_Controller
 
         $this->email->subject('Inscription sur le site Partages Tes Sites');
         $this->email->message('Bonjour,
-        Nous prenons compte de ton inscription sur le site www.sharelink.buffart.eu.
+        Nous prenons compte de ton inscription '.$pseudo.' sur le site www.sharelink.buffart.eu.
 
-        Tu peux dés lors te connecter sur le site via ton email et mot de passe. Bon partages&nbsp;!
+        Tu peux dés lors te connecter sur le site via:
+
+        Ton email '.$email.'
+        Ton mot de passe '.$mdp.'.
+
+        Bon partage!
 
         Cordialement,
 
